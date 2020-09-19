@@ -1,13 +1,14 @@
 import React from 'react'
 import {View, Text, Image} from 'react-native'
 import {useTheme} from 'react-native-paper'
+import Container from '../components/Container'
 
 export default function Home() {
   const {colors} = useTheme()
 
   return (
-    <View style={{backgroundColor: 'red', flex: 1}}>
+    <Container>
       <Text> Hello World </Text>
-    </View>
+    </Container>
   )
 }
