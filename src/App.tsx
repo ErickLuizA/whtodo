@@ -1,13 +1,14 @@
 import 'react-native-gesture-handler'
 import React from 'react'
-import {NavigationContainer} from '@react-navigation/native'
+
 import Screens from './routes/index'
+import ThemeProvider from './context/ThemeContext'
 
 const App = () => {
   return (
-    <NavigationContainer>
+    <ThemeProvider>
       <Screens />
-    </NavigationContainer>
+    </ThemeProvider>
   )
 }
 
