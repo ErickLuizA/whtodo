@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
     paddingHorizontal: 20,
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })
 
