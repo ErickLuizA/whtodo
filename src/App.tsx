@@ -3,12 +3,15 @@ import React from 'react'
 
 import Screens from './routes/index'
 import ThemeProvider from './context/ThemeContext'
+import {AuthProvider} from './context/AuthContext'
 
 const App = () => {
   return (
-    <ThemeProvider>
-      <Screens />
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider>
+        <Screens />
+      </ThemeProvider>
+    </AuthProvider>
   )
 }
 
