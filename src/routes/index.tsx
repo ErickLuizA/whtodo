@@ -1,6 +1,10 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import {AuthContext} from '../context/AuthContext'
+import AppRoutes from './App.routes'
 import AuthRoutes from './Auth.routes'
 
 export default function Screens() {
-  return <AuthRoutes />
+  const {signed} = useContext(AuthContext)
+
+  return signed ? <AppRoutes /> : <AuthRoutes />
 }
