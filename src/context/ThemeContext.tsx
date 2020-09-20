@@ -22,6 +22,7 @@ const CombinedDefaultTheme = {
     secondary: '#575A89',
     text: '#333',
     grayText: '#777777',
+    inputBackground: '#fafafa',
   },
 }
 const CombinedDarkTheme = {
@@ -35,6 +36,7 @@ const CombinedDarkTheme = {
     secondary: '#575A89',
     text: '#F9F9F9',
     grayText: '#777777',
+    inputBackground: '#fafafa',
   },
 }
 
@@ -42,6 +44,7 @@ declare global {
   namespace ReactNativePaper {
     interface ThemeColors {
       secondary: string
+      inputBackground: string
     }
   }
 }
