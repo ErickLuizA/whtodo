@@ -51,7 +51,7 @@ export default function Login() {
     } catch (e) {
       if (/email/.test(e.code)) {
         setError({
-          emailError: e.message,
+          emailError: 'Please enter a valid e-mail',
           passwordError: '',
         })
       }
@@ -59,7 +59,7 @@ export default function Login() {
       if (/password/.test(e.code)) {
         setError({
           emailError: '',
-          passwordError: e.message,
+          passwordError: 'Please enter a valid password',
         })
       }
     }
@@ -69,8 +69,6 @@ export default function Login() {
     GoogleSignin.configure({
       webClientId: Config.WEB_CLIENT_ID,
     })
-
-    console.log(Config.WEB_CLIENT_ID)
 
     try {
       const {idToken} = await GoogleSignin.signIn()

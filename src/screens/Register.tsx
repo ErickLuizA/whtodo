@@ -73,7 +73,7 @@ export default function Register() {
       if (/email/.test(e.code)) {
         setError({
           nameError: '',
-          emailError: e.message,
+          emailError: 'Please enter a valid e-mail',
           passwordError: '',
         })
       }
@@ -82,7 +82,7 @@ export default function Register() {
         setError({
           nameError: '',
           emailError: '',
-          passwordError: e.message,
+          passwordError: 'Please enter a valid password',
         })
       }
     }
@@ -93,12 +93,8 @@ export default function Register() {
       webClientId: Config.WEB_CLIENT_ID,
     })
 
-    console.log(Config.WEB_CLIENT_ID)
-
     try {
       const {idToken} = await GoogleSignin.signIn()
-
-      console.log(idToken)
 
       const googleCredential = auth.GoogleAuthProvider.credential(idToken)
 
