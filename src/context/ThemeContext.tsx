@@ -45,6 +45,7 @@ declare global {
     interface ThemeColors {
       secondary: string
       inputBackground: string
+      grayText: string
     }
   }
 }
@@ -62,7 +63,7 @@ const ThemeProvider: React.FC = ({children}) => {
   const theme = dark ? CombinedDarkTheme : CombinedDefaultTheme
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       const storagedTheme = await AsyncStorage.getItem('@RNTheme')
 
       if (storagedTheme === 'dark') {

@@ -203,6 +203,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     width: width / 1.25,
     justifyContent: 'space-evenly',
+    borderRadius: 5,
   },
 
   row: {
@@ -235,6 +236,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     width: width / 1.25,
     marginTop: 10,
+    borderRadius: 5,
   },
 
   buttonText: {

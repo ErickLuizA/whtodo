@@ -216,6 +216,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     width: width / 1.25,
     marginTop: 10,
+    borderRadius: 5,
   },
 
   buttonText: {
