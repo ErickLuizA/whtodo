@@ -1,10 +1,11 @@
 import React from 'react'
 import {Text, Dimensions, StyleSheet} from 'react-native'
-import {useTheme, TouchableRipple} from 'react-native-paper'
+import {useTheme} from 'react-native-paper'
 import Container from '../components/Container'
 
 import PhoneMan from '../../assets/phoneman.svg'
 import {useNavigation} from '@react-navigation/native'
+import {TouchableOpacity} from 'react-native-gesture-handler'
 
 const width = Dimensions.get('screen').width
 const height = Dimensions.get('screen').height
@@ -28,20 +29,20 @@ export default function Home() {
           whtodo{' '}
         </Text>
       </Text>
-      <TouchableRipple
+      <TouchableOpacity
         onPress={() => handleNavigation('Login')}
         style={[styles.button, {backgroundColor: colors.primary}]}>
         <Text style={[styles.buttonText, {color: colors.secondary}]}>
           LOGIN
         </Text>
-      </TouchableRipple>
-      <TouchableRipple
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={() => handleNavigation('Register')}
         style={[styles.button, {backgroundColor: colors.primary}]}>
         <Text style={[styles.buttonText, {color: colors.secondary}]}>
           REGISTER
         </Text>
-      </TouchableRipple>
+      </TouchableOpacity>
     </Container>
   )
 }

@@ -6,6 +6,9 @@ import Container from '../components/Container'
 import GoogleIcon from '../../assets/googleIcon.svg'
 import {TouchableOpacity} from 'react-native-gesture-handler'
 import {useNavigation} from '@react-navigation/native'
+import auth from '@react-native-firebase/auth'
+import {GoogleSignin} from '@react-native-community/google-signin'
+import Config from 'react-native-config'
 
 const width = Dimensions.get('screen').width
 
@@ -26,12 +29,83 @@ export default function Register() {
     navigation.navigate('Login')
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     setError({
       nameError: '',
       emailError: '',
       passwordError: '',
     })
+
+    if (name.length === 0) {
+      return setError({
+        nameError: 'You need to fill this field',
+        emailError: '',
+        passwordError: '',
+      })
+    }
+
+    if (email.length === 0) {
+      return setError({
+        nameError: '',
+        emailError: 'You need to fill this field',
+        passwordError: '',
+      })
+    }
+
+    if (password.length === 0) {
+      return setError({
+        nameError: '',
+        emailError: '',
+        passwordError: 'You need to fill this field',
+      })
+    }
+
+    try {
+      const createdUser = await auth().createUserWithEmailAndPassword(
+        email,
+        password,
+      )
+
+      await createdUser.user.updateProfile({
+        displayName: name,
+      })
+    } catch (e) {
+      if (/email/.test(e.code)) {
+        setError({
+          nameError: '',
+          emailError: e.message,
+          passwordError: '',
+        })
+      }
+
+      if (/password/.test(e.code)) {
+        setError({
+          nameError: '',
+          emailError: '',
+          passwordError: e.message,
+        })
+      }
+    }
+  }
+
+  async function handleGoogleLogin() {
+    GoogleSignin.configure({
+      webClientId: Config.WEB_CLIENT_ID,
+    })
+
+    console.log(Config.WEB_CLIENT_ID)
+
+    try {
+      const {idToken} = await GoogleSignin.signIn()
+
+      console.log(idToken)
+
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken)
+
+      await auth().signInWithCredential(googleCredential)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
@@ -40,6 +114,7 @@ export default function Register() {
         Create your free account to join us!
       </Title>
       <TouchableOpacity
+        onPress={handleGoogleLogin}
         style={[
           styles.googleButton,
           {backgroundColor: colors.inputBackground},
@@ -58,7 +133,8 @@ export default function Register() {
       </View>
       <TextInput
         value={name}
-        error={Boolean(name)}
+        error={Boolean(error.nameError)}
+        textContentType="name"
         onChangeText={(text) => setName(text)}
         label="Enter your name"
         mode="flat"
@@ -69,7 +145,8 @@ export default function Register() {
       )}
       <TextInput
         value={email}
-        error={Boolean(email)}
+        error={Boolean(error.emailError)}
+        textContentType="emailAddress"
         onChangeText={(text) => setEmail(text)}
         label="Enter your e-mail"
         mode="flat"
@@ -80,7 +157,8 @@ export default function Register() {
       )}
       <TextInput
         value={password}
-        error={Boolean(password)}
+        error={Boolean(error.passwordError)}
+        textContentType="password"
         onChangeText={(text) => setPassword(text)}
         label="Enter your password"
         mode="flat"
