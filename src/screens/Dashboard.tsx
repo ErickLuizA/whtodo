@@ -1,20 +1,28 @@
 import React, {useContext} from 'react'
-import {View, Text} from 'react-native'
-import {TouchableOpacity} from 'react-native-gesture-handler'
+import {Text, StyleSheet, Dimensions} from 'react-native'
 import Container from '../components/Container'
 import {AuthContext} from '../context/AuthContext'
+import {useTheme} from 'react-native-paper'
+import UpperProfile from '../components/UpperProfile'
+
+const width = Dimensions.get('screen').width
 
 export default function Dashboard() {
-  const {signOut, user} = useContext(AuthContext)
+  const {user} = useContext(AuthContext)
+  const {colors} = useTheme()
+
+  function openDrawer() {
+    console.log('open')
+  }
 
   return (
-    <Container>
-      <View>
-        <Text>Hello {user?.displayName} </Text>
-        <TouchableOpacity onPress={signOut}>
-          <Text>Logout</Text>
-        </TouchableOpacity>
-      </View>
-    </Container>
+    <>
+      <UpperProfile openDrawer={openDrawer} />
+      <Container>
+        <Text>Hello</Text>
+      </Container>
+    </>
   )
 }
+
+const styles = StyleSheet.create({})
