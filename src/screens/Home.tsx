@@ -20,8 +20,8 @@ export default function Home() {
 
   return (
     <Container>
-      <PhoneMan width={width / 1.5} height={width / 1.5} />
-      <Text style={[{color: colors.text}, styles.text]}>
+      <PhoneMan width={width / 1.5} height={width / 1.5} testID="img" />
+      <Text style={[{color: colors.text}, styles.text]} testID="text">
         {' '}
         Now you know
         <Text style={[{color: colors.secondary}, styles.italicText]}>
@@ -30,6 +30,7 @@ export default function Home() {
         </Text>
       </Text>
       <TouchableOpacity
+        testID="loginButton"
         onPress={() => handleNavigation('Login')}
         style={[styles.button, {backgroundColor: colors.primary}]}>
         <Text style={[styles.buttonText, {color: colors.secondary}]}>
@@ -37,6 +38,7 @@ export default function Home() {
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
+        testID="registerButton"
         onPress={() => handleNavigation('Register')}
         style={[styles.button, {backgroundColor: colors.primary}]}>
         <Text style={[styles.buttonText, {color: colors.secondary}]}>

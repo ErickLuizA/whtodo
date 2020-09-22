@@ -4,7 +4,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer'
 import Dashboard from '../screens/Dashboard'
 import {AuthContext} from '../context/AuthContext'
 import {Avatar, useTheme} from 'react-native-paper'
-import {Text} from 'react-native-svg'
+import Settings from '../screens/Settings'
 
 const {Screen, Navigator} = createDrawerNavigator()
 
@@ -34,6 +34,7 @@ function Drawer() {
             ),
         }}
       />
+      <Screen name="Settings" component={Settings} />
     </Navigator>
   )
 }
