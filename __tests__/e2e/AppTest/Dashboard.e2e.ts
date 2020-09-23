@@ -1,4 +1,4 @@
-import {expect, element, by} from 'detox'
+import { expect, element, by } from 'detox'
 
 describe('Dashboard flow', () => {
   it('should open drawer', async () => {

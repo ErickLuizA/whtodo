@@ -1,5 +1,5 @@
-import {device, expect, element, by, waitFor} from 'detox'
-import {Logout, randomEmail} from './functions'
+import { device, expect, element, by, waitFor } from 'detox'
+import { Logout, randomEmail } from './functions'
 
 describe('Register flow', () => {
   beforeAll(async () => {

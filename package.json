@@ -2,20 +2,6 @@
   "name": "whtodo",
   "version": "0.0.1",
   "private": true,
-  "jest": {
-    "preset": "react-native",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ], 
-    "testPathIgnorePatterns": [
-      "<rootDir>/__tests__/e2e"
-    ]
-  },
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -60,15 +46,16 @@
     "@types/react-test-renderer": "^16.9.2",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
-    "babel-jest": "^25.1.0",
+    "babel-jest": "26.0.0",
     "detox": "^17.5.7",
     "eslint": "^6.5.1",
     "eslint-plugin-detox": "^1.0.0",
-    "jest": "^25.1.0",
+    "jest": "^26.0.0",
     "jest-circus": "^26.4.2",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-native-testing-library": "^6.0.0",
     "react-test-renderer": "16.13.1",
+    "ts-jest": "^26.4.0",
     "typescript": "^3.8.3"
   }
 }

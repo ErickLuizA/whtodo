@@ -1,5 +1,5 @@
-import {device, expect, element, by, waitFor} from 'detox'
-import {Login, Logout} from './functions'
+import { device, expect, element, by, waitFor } from 'detox'
+import { Login, Logout } from './functions'
 
 describe('Login flow', () => {
   beforeAll(async () => {

@@ -1,4 +1,4 @@
-import {expect, element, by} from 'detox'
+import { expect, element, by } from 'detox'
 
 export const Login = async () => {
   const emailInput = element(by.id('emailInput'))
