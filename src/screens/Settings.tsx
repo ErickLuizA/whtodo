@@ -1,21 +1,21 @@
-import {DrawerNavigationProp} from '@react-navigation/drawer'
-import {ParamListBase, useNavigation} from '@react-navigation/native'
-import React, {useContext} from 'react'
-import {Dimensions, StatusBar, StyleSheet, Text} from 'react-native'
-import {TouchableOpacity} from 'react-native-gesture-handler'
-import {useTheme} from 'react-native-paper'
-import {SafeAreaView} from 'react-native-safe-area-context'
+import { DrawerNavigationProp } from '@react-navigation/drawer'
+import { ParamListBase, useNavigation } from '@react-navigation/native'
+import React, { useContext } from 'react'
+import { Dimensions, StatusBar, StyleSheet, Text } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { useTheme } from 'react-native-paper'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import Container from '../components/Container'
-import {AuthContext} from '../context/AuthContext'
-import {ThemeContext} from '../context/ThemeContext'
+import { AuthContext } from '../context/AuthContext'
+import { ThemeContext } from '../context/ThemeContext'
 
 const width = Dimensions.get('screen').width
 
 export default function Settings() {
-  const {signOut} = useContext(AuthContext)
-  const {dark, toggle} = useContext(ThemeContext)
-  const {colors} = useTheme()
+  const { signOut } = useContext(AuthContext)
+  const { dark, toggle } = useContext(ThemeContext)
+  const { colors } = useTheme()
   const navigation = useNavigation<DrawerNavigationProp<ParamListBase>>()
 
   function handleNavigation() {
@@ -34,17 +34,17 @@ export default function Settings() {
       <Container>
         <TouchableOpacity
           onPress={handleNavigation}
-          style={[{backgroundColor: colors.primary}, styles.button]}
+          style={[{ backgroundColor: colors.primary }, styles.button]}
           testID="account">
           <Icon name="account-box" size={40} color={colors.secondary} />
 
-          <Text style={[styles.buttonText, {color: colors.secondary}]}>
+          <Text style={[styles.buttonText, { color: colors.secondary }]}>
             Account
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={toggle}
-          style={[{backgroundColor: colors.primary}, styles.button]}
+          style={[{ backgroundColor: colors.primary }, styles.button]}
           testID="theme">
           {dark ? (
             <Icon name="brightness-7" size={40} color={colors.secondary} />
@@ -52,16 +52,16 @@ export default function Settings() {
             <Icon name="brightness-3" size={40} color={colors.secondary} />
           )}
 
-          <Text style={[styles.buttonText, {color: colors.secondary}]}>
+          <Text style={[styles.buttonText, { color: colors.secondary }]}>
             Theme
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={signOut}
-          style={[{backgroundColor: colors.primary}, styles.button]}
+          style={[{ backgroundColor: colors.primary }, styles.button]}
           testID="logout">
           <Icon name="logout" size={40} color={colors.secondary} />
-          <Text style={[styles.buttonText, {color: colors.secondary}]}>
+          <Text style={[styles.buttonText, { color: colors.secondary }]}>
             Logout
           </Text>
         </TouchableOpacity>

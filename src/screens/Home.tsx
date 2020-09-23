@@ -1,17 +1,17 @@
 import React from 'react'
-import {Text, Dimensions, StyleSheet} from 'react-native'
-import {useTheme} from 'react-native-paper'
+import { Text, Dimensions, StyleSheet } from 'react-native'
+import { useTheme } from 'react-native-paper'
 import Container from '../components/Container'
 
 import PhoneMan from '../../assets/phoneman.svg'
-import {useNavigation} from '@react-navigation/native'
-import {TouchableOpacity} from 'react-native-gesture-handler'
+import { useNavigation } from '@react-navigation/native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const width = Dimensions.get('screen').width
 const height = Dimensions.get('screen').height
 
 export default function Home() {
-  const {colors} = useTheme()
+  const { colors } = useTheme()
   const navigation = useNavigation()
 
   function handleNavigation(props: string) {
@@ -21,10 +21,10 @@ export default function Home() {
   return (
     <Container>
       <PhoneMan width={width / 1.5} height={width / 1.5} testID="img" />
-      <Text style={[{color: colors.text}, styles.text]} testID="text">
+      <Text style={[{ color: colors.text }, styles.text]} testID="text">
         {' '}
         Now you know
-        <Text style={[{color: colors.secondary}, styles.italicText]}>
+        <Text style={[{ color: colors.secondary }, styles.italicText]}>
           {' '}
           whtodo{' '}
         </Text>
@@ -32,16 +32,16 @@ export default function Home() {
       <TouchableOpacity
         testID="loginButton"
         onPress={() => handleNavigation('Login')}
-        style={[styles.button, {backgroundColor: colors.primary}]}>
-        <Text style={[styles.buttonText, {color: colors.secondary}]}>
+        style={[styles.button, { backgroundColor: colors.primary }]}>
+        <Text style={[styles.buttonText, { color: colors.secondary }]}>
           LOGIN
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
         testID="registerButton"
         onPress={() => handleNavigation('Register')}
-        style={[styles.button, {backgroundColor: colors.primary}]}>
-        <Text style={[styles.buttonText, {color: colors.secondary}]}>
+        style={[styles.button, { backgroundColor: colors.primary }]}>
+        <Text style={[styles.buttonText, { color: colors.secondary }]}>
           REGISTER
         </Text>
       </TouchableOpacity>

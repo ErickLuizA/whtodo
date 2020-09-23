@@ -1,13 +1,13 @@
 import React from 'react'
-import {SafeAreaView, StyleSheet, StatusBar} from 'react-native'
-import {useTheme} from 'react-native-paper'
+import { SafeAreaView, StyleSheet, StatusBar } from 'react-native'
+import { useTheme } from 'react-native-paper'
 
-const Container: React.FC = ({children}) => {
-  const {colors} = useTheme()
+const Container: React.FC = ({ children }) => {
+  const { colors } = useTheme()
 
   return (
     <SafeAreaView
-      style={[{backgroundColor: colors.background}, styles.container]}>
+      style={[{ backgroundColor: colors.background }, styles.container]}>
       {children}
     </SafeAreaView>
   )

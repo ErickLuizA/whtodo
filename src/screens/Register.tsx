@@ -1,19 +1,19 @@
 import * as React from 'react'
-import {View, Text, StyleSheet, Dimensions} from 'react-native'
-import {Divider, TextInput, Title, useTheme} from 'react-native-paper'
+import { View, Text, StyleSheet, Dimensions } from 'react-native'
+import { Divider, TextInput, Title, useTheme } from 'react-native-paper'
 import Container from '../components/Container'
 
 import GoogleIcon from '../../assets/googleIcon.svg'
-import {TouchableOpacity} from 'react-native-gesture-handler'
-import {useNavigation} from '@react-navigation/native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { useNavigation } from '@react-navigation/native'
 import auth from '@react-native-firebase/auth'
-import {GoogleSignin} from '@react-native-community/google-signin'
+import { GoogleSignin } from '@react-native-community/google-signin'
 import Config from 'react-native-config'
 
 const width = Dimensions.get('screen').width
 
 export default function Register() {
-  const {colors} = useTheme()
+  const { colors } = useTheme()
   const navigation = useNavigation()
 
   const [name, setName] = React.useState('')
@@ -94,7 +94,7 @@ export default function Register() {
     })
 
     try {
-      const {idToken} = await GoogleSignin.signIn()
+      const { idToken } = await GoogleSignin.signIn()
 
       const googleCredential = auth.GoogleAuthProvider.credential(idToken)
 
@@ -107,7 +107,7 @@ export default function Register() {
   return (
     <Container>
       <Title
-        style={[styles.title, {color: colors.secondary}]}
+        style={[styles.title, { color: colors.secondary }]}
         testID="registerTitle">
         Create your free account to join us!
       </Title>
@@ -116,18 +116,18 @@ export default function Register() {
         onPress={handleGoogleLogin}
         style={[
           styles.googleButton,
-          {backgroundColor: colors.inputBackground},
+          { backgroundColor: colors.inputBackground },
         ]}>
         <>
           <GoogleIcon />
-          <Text style={[styles.googleButtonText, {color: colors.secondary}]}>
+          <Text style={[styles.googleButtonText, { color: colors.secondary }]}>
             REGISTER WITH GOOGLE
           </Text>
         </>
       </TouchableOpacity>
       <View style={styles.row}>
         <Divider style={styles.divider} />
-        <Text style={[{color: colors.text}, styles.or]}>or</Text>
+        <Text style={[{ color: colors.text }, styles.or]}>or</Text>
         <Divider style={styles.divider} />
       </View>
       <TextInput
@@ -179,15 +179,18 @@ export default function Register() {
       <TouchableOpacity
         testID="submitRegisterButton"
         onPress={handleSubmit}
-        style={[styles.button, {backgroundColor: colors.primary}]}>
+        style={[styles.button, { backgroundColor: colors.primary }]}>
         <Text style={styles.buttonText}>REGISTER</Text>
       </TouchableOpacity>
       <View style={styles.row}>
-        <Text style={[styles.text, {color: colors.text}]}>
+        <Text style={[styles.text, { color: colors.text }]}>
           Already have a account?
         </Text>
         <TouchableOpacity onPress={handleNavigation} testID="sendToLogin">
-          <Text style={[{color: colors.secondary}, styles.login]}> Login</Text>
+          <Text style={[{ color: colors.secondary }, styles.login]}>
+            {' '}
+            Login
+          </Text>
         </TouchableOpacity>
       </View>
     </Container>

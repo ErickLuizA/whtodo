@@ -1,19 +1,19 @@
-import React, {useContext} from 'react'
-import {Text, StyleSheet, Dimensions, View} from 'react-native'
+import React, { useContext } from 'react'
+import { Text, StyleSheet, Dimensions, View } from 'react-native'
 import Container from '../components/Container'
-import {AuthContext} from '../context/AuthContext'
-import {useTheme} from 'react-native-paper'
+import { AuthContext } from '../context/AuthContext'
+import { useTheme } from 'react-native-paper'
 import UpperProfile from '../components/UpperProfile'
-import {ParamListBase, useNavigation} from '@react-navigation/native'
-import {DrawerNavigationProp} from '@react-navigation/drawer'
+import { ParamListBase, useNavigation } from '@react-navigation/native'
+import { DrawerNavigationProp } from '@react-navigation/drawer'
 import Progress from '../components/Progress'
 import TaskCard from '../components/TaskCard'
 
 const width = Dimensions.get('screen').width
 
 export default function Dashboard() {
-  const {user} = useContext(AuthContext)
-  const {colors} = useTheme()
+  const { user } = useContext(AuthContext)
+  const { colors } = useTheme()
   const navigation = useNavigation<DrawerNavigationProp<ParamListBase>>()
 
   function openDrawer() {
@@ -26,7 +26,7 @@ export default function Dashboard() {
       <Container>
         <View style={styles.flex}>
           <Progress progressType="Daily" />
-          <Text style={[{color: colors.secondary}, styles.text]}>
+          <Text style={[{ color: colors.secondary }, styles.text]}>
             {' '}
             Daily Tasks
           </Text>
@@ -45,5 +45,5 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 
-  flex: {flex: 1},
+  flex: { flex: 1 },
 })

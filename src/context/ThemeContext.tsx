@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useState} from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import {
   NavigationContainer,
   DarkTheme as NavigationDarkTheme,
@@ -57,13 +57,13 @@ interface ContextProps {
 
 export const ThemeContext = createContext({} as ContextProps)
 
-const ThemeProvider: React.FC = ({children}) => {
+const ThemeProvider: React.FC = ({ children }) => {
   const [dark, setDark] = useState(false)
 
   const theme = dark ? CombinedDarkTheme : CombinedDefaultTheme
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       const storagedTheme = await AsyncStorage.getItem('@RNTheme')
 
       if (storagedTheme === 'dark') {
@@ -84,7 +84,7 @@ const ThemeProvider: React.FC = ({children}) => {
   }
 
   return (
-    <ThemeContext.Provider value={{dark, toggle}}>
+    <ThemeContext.Provider value={{ dark, toggle }}>
       <PaperProvider theme={theme}>
         <NavigationContainer theme={theme}>{children}</NavigationContainer>
       </PaperProvider>

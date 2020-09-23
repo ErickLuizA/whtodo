@@ -1,5 +1,5 @@
-import React, {createContext, useEffect, useState} from 'react'
-import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth'
+import React, { createContext, useEffect, useState } from 'react'
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
 
 interface AuthContextProps {
   signed: boolean
@@ -10,7 +10,7 @@ interface AuthContextProps {
 
 const AuthContext = createContext<AuthContextProps>({} as AuthContextProps)
 
-const AuthProvider: React.FC = ({children}) => {
+const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null)
   const [loading, setLoading] = useState(false)
 
@@ -31,10 +31,10 @@ const AuthProvider: React.FC = ({children}) => {
 
   return (
     <AuthContext.Provider
-      value={{signed: Boolean(user), user, signOut, loading}}>
+      value={{ signed: Boolean(user), user, signOut, loading }}>
       {children}
     </AuthContext.Provider>
   )
 }
 
-export {AuthContext, AuthProvider}
+export { AuthContext, AuthProvider }

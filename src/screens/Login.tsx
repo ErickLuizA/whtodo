@@ -1,18 +1,18 @@
 import React from 'react'
-import {Text, StyleSheet, Dimensions, View} from 'react-native'
-import {TouchableOpacity} from 'react-native-gesture-handler'
+import { Text, StyleSheet, Dimensions, View } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import Container from '../components/Container'
-import {useNavigation} from '@react-navigation/native'
-import {Divider, TextInput, Title, useTheme} from 'react-native-paper'
+import { useNavigation } from '@react-navigation/native'
+import { Divider, TextInput, Title, useTheme } from 'react-native-paper'
 import auth from '@react-native-firebase/auth'
 import GoogleIcon from '../../assets/googleIcon.svg'
-import {GoogleSignin} from '@react-native-community/google-signin'
+import { GoogleSignin } from '@react-native-community/google-signin'
 import Config from 'react-native-config'
 
 const width = Dimensions.get('screen').width
 
 export default function Login() {
-  const {colors} = useTheme()
+  const { colors } = useTheme()
   const navigation = useNavigation()
 
   const [email, setEmail] = React.useState('')
@@ -71,7 +71,7 @@ export default function Login() {
     })
 
     try {
-      const {idToken} = await GoogleSignin.signIn()
+      const { idToken } = await GoogleSignin.signIn()
 
       const googleCredential = auth.GoogleAuthProvider.credential(idToken)
 
@@ -88,7 +88,7 @@ export default function Login() {
   return (
     <Container>
       <Title
-        style={[styles.title, {color: colors.secondary}]}
+        style={[styles.title, { color: colors.secondary }]}
         testID="loginTitle">
         WELCOME BACK
       </Title>
@@ -97,18 +97,18 @@ export default function Login() {
         onPress={handleGoogleLogin}
         style={[
           styles.googleButton,
-          {backgroundColor: colors.inputBackground},
+          { backgroundColor: colors.inputBackground },
         ]}>
         <>
           <GoogleIcon />
-          <Text style={[styles.googleButtonText, {color: colors.secondary}]}>
+          <Text style={[styles.googleButtonText, { color: colors.secondary }]}>
             LOGIN WITH GOOGLE
           </Text>
         </>
       </TouchableOpacity>
       <View style={styles.row}>
         <Divider style={styles.divider} />
-        <Text style={[{color: colors.text}, styles.or]}>or</Text>
+        <Text style={[{ color: colors.text }, styles.or]}>or</Text>
         <Divider style={styles.divider} />
       </View>
 
@@ -143,22 +143,22 @@ export default function Login() {
         </Text>
       )}
       <TouchableOpacity onPress={handleForgotPass} testID="forgotButton">
-        <Text style={[styles.forgot, {color: colors.secondary}]}>
+        <Text style={[styles.forgot, { color: colors.secondary }]}>
           Forgot your password?
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
         testID="submitLoginButton"
         onPress={handleSubmit}
-        style={[styles.button, {backgroundColor: colors.primary}]}>
+        style={[styles.button, { backgroundColor: colors.primary }]}>
         <Text style={styles.buttonText}>LOGIN</Text>
       </TouchableOpacity>
       <View style={styles.row}>
-        <Text style={[styles.text, {color: colors.text}]}>
+        <Text style={[styles.text, { color: colors.text }]}>
           Don't have a account?
         </Text>
         <TouchableOpacity onPress={handleNavigation} testID="sendToRegister">
-          <Text style={[{color: colors.secondary}, styles.register]}>
+          <Text style={[{ color: colors.secondary }, styles.register]}>
             {' '}
             Register
           </Text>

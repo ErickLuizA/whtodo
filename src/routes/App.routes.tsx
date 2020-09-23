@@ -1,17 +1,17 @@
-import React, {useContext} from 'react'
-import {createDrawerNavigator} from '@react-navigation/drawer'
+import React, { useContext } from 'react'
+import { createDrawerNavigator } from '@react-navigation/drawer'
 
 import Dashboard from '../screens/Dashboard'
-import {AuthContext} from '../context/AuthContext'
-import {Avatar, useTheme} from 'react-native-paper'
+import { AuthContext } from '../context/AuthContext'
+import { Avatar, useTheme } from 'react-native-paper'
 import Settings from '../screens/Settings'
-import {Text} from 'react-native'
+import { Text } from 'react-native'
 
-const {Screen, Navigator} = createDrawerNavigator()
+const { Screen, Navigator } = createDrawerNavigator()
 
 function Drawer() {
-  const {user} = useContext(AuthContext)
-  const {colors} = useTheme()
+  const { user } = useContext(AuthContext)
+  const { colors } = useTheme()
 
   return (
     <Navigator
@@ -27,14 +27,14 @@ function Drawer() {
         component={Dashboard}
         options={{
           drawerLabel: () => (
-            <Text testID="dashboard" style={{color: colors.secondary}}>
+            <Text testID="dashboard" style={{ color: colors.secondary }}>
               {' '}
               Dashboard{' '}
             </Text>
           ),
           drawerIcon: () =>
             user?.photoURL ? (
-              <Avatar.Image source={{uri: user?.photoURL}} />
+              <Avatar.Image source={{ uri: user?.photoURL }} />
             ) : (
               <Avatar.Icon icon="account" />
             ),
@@ -45,7 +45,7 @@ function Drawer() {
         component={Settings}
         options={{
           drawerLabel: () => (
-            <Text testID="settings" style={{color: colors.secondary}}>
+            <Text testID="settings" style={{ color: colors.secondary }}>
               {' '}
               Settings{' '}
             </Text>

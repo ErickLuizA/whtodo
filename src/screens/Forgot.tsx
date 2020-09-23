@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {View, Text, Dimensions, StyleSheet} from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, Dimensions, StyleSheet } from 'react-native'
 import Container from '../components/Container'
 import Auth from '../../assets/auth.svg'
 import {
@@ -9,15 +9,15 @@ import {
   Title,
   useTheme,
 } from 'react-native-paper'
-import {TouchableOpacity} from 'react-native-gesture-handler'
-import {useNavigation} from '@react-navigation/native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { useNavigation } from '@react-navigation/native'
 import auth from '@react-native-firebase/auth'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const width = Dimensions.get('screen').width
 
 export default function Forgot() {
-  const {colors} = useTheme()
+  const { colors } = useTheme()
   const navigation = useNavigation()
 
   const [email, setEmail] = useState('')
@@ -58,11 +58,11 @@ export default function Forgot() {
       </TouchableOpacity>
       <Auth width={width / 1.25} height={width / 1.3} />
       <Title
-        style={[styles.title, {color: colors.secondary}]}
+        style={[styles.title, { color: colors.secondary }]}
         testID="forgotTitle">
         Forgot your password?
       </Title>
-      <Paragraph style={[styles.text, {color: colors.text}]}>
+      <Paragraph style={[styles.text, { color: colors.text }]}>
         We just need your registered e-mail to send you password reset
         instructions
       </Paragraph>
@@ -80,15 +80,15 @@ export default function Forgot() {
       <TouchableOpacity
         testID="resetButton"
         onPress={handleSubmit}
-        style={[styles.button, {backgroundColor: colors.primary}]}>
+        style={[styles.button, { backgroundColor: colors.primary }]}>
         <Text style={styles.buttonText}>RESET PASSWORD</Text>
       </TouchableOpacity>
       <View style={styles.row}>
-        <Text style={[styles.registerText, {color: colors.text}]}>
+        <Text style={[styles.registerText, { color: colors.text }]}>
           Don't have a account?
         </Text>
         <TouchableOpacity onPress={handleNavigation}>
-          <Text style={[{color: colors.secondary}, styles.register]}>
+          <Text style={[{ color: colors.secondary }, styles.register]}>
             Register
           </Text>
         </TouchableOpacity>
@@ -155,5 +155,5 @@ const styles = StyleSheet.create({
     width: width / 1.25,
   },
 
-  backButton: {width: width / 1.1, alignItems: 'flex-start'},
+  backButton: { width: width / 1.1, alignItems: 'flex-start' },
 })
