@@ -106,10 +106,13 @@ export default function Register() {
 
   return (
     <Container>
-      <Title style={[styles.title, {color: colors.secondary}]}>
+      <Title
+        style={[styles.title, {color: colors.secondary}]}
+        testID="registerTitle">
         Create your free account to join us!
       </Title>
       <TouchableOpacity
+        testID="googleButton"
         onPress={handleGoogleLogin}
         style={[
           styles.googleButton,
@@ -128,6 +131,7 @@ export default function Register() {
         <Divider style={styles.divider} />
       </View>
       <TextInput
+        testID="nameInput"
         value={name}
         error={Boolean(error.nameError)}
         textContentType="name"
@@ -137,9 +141,12 @@ export default function Register() {
         style={styles.input}
       />
       {Boolean(error.nameError) && (
-        <Text style={styles.error}>{error.nameError}</Text>
+        <Text testID="nameError" style={styles.error}>
+          {error.nameError}
+        </Text>
       )}
       <TextInput
+        testID="emailInput"
         value={email}
         error={Boolean(error.emailError)}
         textContentType="emailAddress"
@@ -149,9 +156,12 @@ export default function Register() {
         style={styles.input}
       />
       {Boolean(error.emailError) && (
-        <Text style={styles.error}>{error.emailError}</Text>
+        <Text testID="emailError" style={styles.error}>
+          {error.emailError}
+        </Text>
       )}
       <TextInput
+        testID="passwordInput"
         value={password}
         error={Boolean(error.passwordError)}
         textContentType="password"
@@ -161,10 +171,13 @@ export default function Register() {
         style={styles.input}
       />
       {Boolean(error.passwordError) && (
-        <Text style={styles.error}>{error.passwordError}</Text>
+        <Text testID="passwordError" style={styles.error}>
+          {error.passwordError}
+        </Text>
       )}
 
       <TouchableOpacity
+        testID="submitRegisterButton"
         onPress={handleSubmit}
         style={[styles.button, {backgroundColor: colors.primary}]}>
         <Text style={styles.buttonText}>REGISTER</Text>
@@ -173,7 +186,7 @@ export default function Register() {
         <Text style={[styles.text, {color: colors.text}]}>
           Already have a account?
         </Text>
-        <TouchableOpacity onPress={handleNavigation}>
+        <TouchableOpacity onPress={handleNavigation} testID="sendToLogin">
           <Text style={[{color: colors.secondary}, styles.login]}> Login</Text>
         </TouchableOpacity>
       </View>

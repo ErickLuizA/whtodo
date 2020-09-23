@@ -5,6 +5,7 @@ import Dashboard from '../screens/Dashboard'
 import {AuthContext} from '../context/AuthContext'
 import {Avatar, useTheme} from 'react-native-paper'
 import Settings from '../screens/Settings'
+import {Text} from 'react-native'
 
 const {Screen, Navigator} = createDrawerNavigator()
 
@@ -16,7 +17,6 @@ function Drawer() {
     <Navigator
       initialRouteName="Dashboard"
       drawerContentOptions={{
-        labelStyle: {color: colors.secondary},
         activeBackgroundColor: '#bbe',
       }}
       drawerStyle={{
@@ -26,6 +26,12 @@ function Drawer() {
         name="Dashboard"
         component={Dashboard}
         options={{
+          drawerLabel: () => (
+            <Text testID="dashboard" style={{color: colors.secondary}}>
+              {' '}
+              Dashboard{' '}
+            </Text>
+          ),
           drawerIcon: () =>
             user?.photoURL ? (
               <Avatar.Image source={{uri: user?.photoURL}} />
@@ -34,7 +40,21 @@ function Drawer() {
             ),
         }}
       />
-      <Screen name="Settings" component={Settings} />
+      <Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          drawerLabel: () => (
+            <Text testID="settings" style={{color: colors.secondary}}>
+              {' '}
+              Settings{' '}
+            </Text>
+          ),
+          drawerIcon: () => (
+            <Avatar.Icon icon="saw-blade" color={colors.secondary} />
+          ),
+        }}
+      />
     </Navigator>
   )
 }

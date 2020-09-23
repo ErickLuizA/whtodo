@@ -87,10 +87,13 @@ export default function Login() {
 
   return (
     <Container>
-      <Title style={[styles.title, {color: colors.secondary}]}>
+      <Title
+        style={[styles.title, {color: colors.secondary}]}
+        testID="loginTitle">
         WELCOME BACK
       </Title>
       <TouchableOpacity
+        testID="googleButton"
         onPress={handleGoogleLogin}
         style={[
           styles.googleButton,
@@ -110,6 +113,7 @@ export default function Login() {
       </View>
 
       <TextInput
+        testID="emailInput"
         value={email}
         error={Boolean(error.emailError)}
         textContentType="emailAddress"
@@ -119,9 +123,12 @@ export default function Login() {
         style={styles.input}
       />
       {Boolean(error.emailError) && (
-        <Text style={styles.error}>{error.emailError}</Text>
+        <Text testID="emailError" style={styles.error}>
+          {error.emailError}
+        </Text>
       )}
       <TextInput
+        testID="passwordInput"
         value={password}
         error={Boolean(error.passwordError)}
         textContentType="password"
@@ -131,14 +138,17 @@ export default function Login() {
         style={styles.input}
       />
       {Boolean(error.passwordError) && (
-        <Text style={styles.error}>{error.passwordError}</Text>
+        <Text testID="passwordError" style={styles.error}>
+          {error.passwordError}
+        </Text>
       )}
-      <TouchableOpacity onPress={handleForgotPass}>
+      <TouchableOpacity onPress={handleForgotPass} testID="forgotButton">
         <Text style={[styles.forgot, {color: colors.secondary}]}>
           Forgot your password?
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
+        testID="submitLoginButton"
         onPress={handleSubmit}
         style={[styles.button, {backgroundColor: colors.primary}]}>
         <Text style={styles.buttonText}>LOGIN</Text>
@@ -147,8 +157,8 @@ export default function Login() {
         <Text style={[styles.text, {color: colors.text}]}>
           Don't have a account?
         </Text>
-        <TouchableOpacity onPress={handleNavigation}>
-          <Text style={[{color: colors.secondary}, styles.login]}>
+        <TouchableOpacity onPress={handleNavigation} testID="sendToRegister">
+          <Text style={[{color: colors.secondary}, styles.register]}>
             {' '}
             Register
           </Text>
@@ -229,7 +239,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto-Regular',
   },
 
-  login: {
+  register: {
     fontFamily: 'Roboto-Italic',
   },
   error: {

@@ -20,7 +20,7 @@ const UpperProfile: React.FC<IProps> = ({openDrawer}) => {
 
   return (
     <SafeAreaView style={[{backgroundColor: colors.primary}, styles.container]}>
-      <TouchableOpacity style={styles.menu} onPress={openDrawer}>
+      <TouchableOpacity testID="menu" style={styles.menu} onPress={openDrawer}>
         <Icon name="subject" size={60} color={colors.secondary} />
       </TouchableOpacity>
       <View style={styles.avatarContainer}>
@@ -35,7 +35,7 @@ const UpperProfile: React.FC<IProps> = ({openDrawer}) => {
             <Avatar.Icon icon="account" size={80} style={styles.avatar} />
           )}
         </TouchableOpacity>
-        <Text style={styles.text}>
+        <Text style={styles.text} testID="hello">
           Hello,{' '}
           <Text style={[styles.text, {color: colors.secondary}]}>
             {user?.displayName}

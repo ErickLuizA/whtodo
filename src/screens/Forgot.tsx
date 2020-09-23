@@ -57,7 +57,9 @@ export default function Forgot() {
         <Icon name="keyboard-backspace" size={60} color={colors.secondary} />
       </TouchableOpacity>
       <Auth width={width / 1.25} height={width / 1.3} />
-      <Title style={[styles.title, {color: colors.secondary}]}>
+      <Title
+        style={[styles.title, {color: colors.secondary}]}
+        testID="forgotTitle">
         Forgot your password?
       </Title>
       <Paragraph style={[styles.text, {color: colors.text}]}>
@@ -65,6 +67,7 @@ export default function Forgot() {
         instructions
       </Paragraph>
       <TextInput
+        testID="forgotInput"
         value={email}
         error={Boolean(error)}
         textContentType="emailAddress"
@@ -75,6 +78,7 @@ export default function Forgot() {
       />
       {Boolean(error) && <Text style={styles.error}>{error}</Text>}
       <TouchableOpacity
+        testID="resetButton"
         onPress={handleSubmit}
         style={[styles.button, {backgroundColor: colors.primary}]}>
         <Text style={styles.buttonText}>RESET PASSWORD</Text>
@@ -89,7 +93,7 @@ export default function Forgot() {
           </Text>
         </TouchableOpacity>
       </View>
-      <Snackbar visible={visible} onDismiss={toggleSnackBar}>
+      <Snackbar testID="snackbar" visible={visible} onDismiss={toggleSnackBar}>
         Go check your e-mail!
       </Snackbar>
     </Container>
