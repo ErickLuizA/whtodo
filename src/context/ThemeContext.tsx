@@ -11,6 +11,11 @@ import {
 } from 'react-native-paper'
 import AsyncStorage from '@react-native-community/async-storage'
 
+import phoneman from '../../assets/phoneman.svg'
+import phoneman_dark from '../../assets/phoneman_dark.svg'
+import notfound from '../../assets/notfound.svg'
+import notfound_dark from '../../assets/notfound.svg'
+
 const CombinedDefaultTheme = {
   ...PaperDefaultTheme,
   ...NavigationDefaultTheme,
@@ -20,9 +25,17 @@ const CombinedDefaultTheme = {
     background: '#EAEAFA',
     primary: '#aad',
     secondary: '#575A89',
-    text: '#333',
+    text: '#555',
     grayText: '#777777',
     inputBackground: '#fafafa',
+    purpleInput: '#cce',
+    profileBackground: '#aad',
+    drawerBackground: '#aad',
+    activeDrawer: '#bbe',
+  },
+  images: {
+    phoneman,
+    notfound,
   },
 }
 const CombinedDarkTheme = {
@@ -34,9 +47,18 @@ const CombinedDarkTheme = {
     background: '#15202B',
     primary: '#aad',
     secondary: '#575A89',
-    text: '#F9F9F9',
+    text: '#eee',
     grayText: '#777777',
     inputBackground: '#fafafa',
+    purpleInput: '#cce',
+
+    profileBackground: '#151a2b',
+    drawerBackground: '#151a2b',
+    activeDrawer: '#15203B',
+  },
+  images: {
+    phoneman: phoneman_dark,
+    notfound: notfound_dark,
   },
 }
 
@@ -46,6 +68,14 @@ declare global {
       secondary: string
       inputBackground: string
       grayText: string
+      profileBackground: string
+      drawerBackground: string
+      purpleInput: string
+      activeDrawer: string
+    }
+    interface images {
+      phoneman: SVGElement
+      notfound: SVGElement
     }
   }
 }

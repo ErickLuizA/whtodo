@@ -10,8 +10,10 @@ module.exports = {
     },
   },
   testPathIgnorePatterns: ['<rootDir>/__tests__/e2e'],
-
-  // This is the only part which you can keep
-  // from the above linked tutorial's config:
+  moduleNameMapper: {
+    '.+\\.(css|styl|less|sass|scss|png|jpg|svg|ttf|woff|woff2)$':
+      'jest-transform-stub',
+    '\\.(css|less)$': 'identity-obj-proxy',
+  },
   cacheDirectory: '.jest/cache',
 }

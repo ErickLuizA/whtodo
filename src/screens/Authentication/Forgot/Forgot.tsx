@@ -1,18 +1,14 @@
 import React, { useState } from 'react'
 import { View, Text, Dimensions, StyleSheet } from 'react-native'
-import Container from '../components/Container'
-import Auth from '../../assets/auth.svg'
-import {
-  Paragraph,
-  Snackbar,
-  TextInput,
-  Title,
-  useTheme,
-} from 'react-native-paper'
+import Container from '../../../components/Container'
+import Auth from '../../../../assets/auth.svg'
+import { Paragraph, Snackbar, Title, useTheme } from 'react-native-paper'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
 import auth from '@react-native-firebase/auth'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import Button from '../../../components/Button'
+import Input from '../../../components/Input'
 
 const width = Dimensions.get('screen').width
 
@@ -66,23 +62,13 @@ export default function Forgot() {
         We just need your registered e-mail to send you password reset
         instructions
       </Paragraph>
-      <TextInput
-        testID="forgotInput"
-        value={email}
-        error={Boolean(error)}
-        textContentType="emailAddress"
-        onChangeText={(text) => setEmail(text)}
-        label="Enter your e-mail"
-        mode="flat"
-        style={styles.input}
+      <Input
+        setState={setEmail}
+        inputName="email"
+        input={email}
+        error={error}
       />
-      {Boolean(error) && <Text style={styles.error}>{error}</Text>}
-      <TouchableOpacity
-        testID="resetButton"
-        onPress={handleSubmit}
-        style={[styles.button, { backgroundColor: colors.primary }]}>
-        <Text style={styles.buttonText}>RESET PASSWORD</Text>
-      </TouchableOpacity>
+      <Button onPress={handleSubmit} big text="RESET PASSWORD" />
       <View style={styles.row}>
         <Text style={[styles.registerText, { color: colors.text }]}>
           Don't have a account?
@@ -107,25 +93,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
 
-  input: {
-    width: width / 1.25,
-    backgroundColor: '#fafafa',
-    marginVertical: 20,
-  },
-
-  button: {
-    paddingVertical: 20,
-    width: width / 1.25,
-    marginTop: 10,
-    borderRadius: 5,
-  },
-
-  buttonText: {
-    textAlign: 'center',
-    fontFamily: 'Roboto-Light',
-    fontSize: 18,
-  },
-
   text: {
     fontFamily: 'Roboto-Light',
     fontSize: 18,
@@ -145,14 +112,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
   },
+
   register: {
     fontFamily: 'Roboto-Italic',
-  },
-
-  error: {
-    color: '#f00',
-    textAlign: 'left',
-    width: width / 1.25,
   },
 
   backButton: { width: width / 1.1, alignItems: 'flex-start' },

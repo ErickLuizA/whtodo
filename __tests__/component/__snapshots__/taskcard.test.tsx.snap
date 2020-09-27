@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TaskCard /> render the TaskCard component 1`] = `
+<View
+  style={
+    Object {
+      "flexDirection": "row",
+      "justifyContent": "center",
+    }
+  }
+  testID="cardContainer"
+>
+  <Text
+    numberOfLines={1}
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#f50057",
+        "borderRadius": 15,
+        "color": "#ffffff",
+        "fontFamily": "System",
+        "fontSize": 14,
+        "fontWeight": "400",
+        "height": 30,
+        "lineHeight": 30,
+        "minWidth": 30,
+        "opacity": 0,
+        "overflow": "hidden",
+        "paddingHorizontal": 20,
+        "textAlign": "center",
+        "textAlignVertical": "center",
+        "transform": Array [
+          Object {
+            "rotate": "270deg",
+          },
+        ],
+      }
+    }
+  >
+    21/07
+  </Text>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderRadius": 5,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "padding": 10,
+          "paddingVertical": 10,
+          "width": 576.9230769230769,
+        },
+        Object {
+          "backgroundColor": "#6200ee",
+        },
+      ]
+    }
+  >
+    <View>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+            },
+            Object {
+              "fontFamily": "Roboto-Regular",
+              "fontSize": 18,
+            },
+          ]
+        }
+      >
+         
+        Task Name
+         
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": undefined,
+            },
+            Object {
+              "fontFamily": "Roboto-Light",
+              "fontSize": 18,
+            },
+          ]
+        }
+      >
+         
+        Category Name
+         
+      </Text>
+    </View>
+    <View>
+      <Text
+        allowFontScaling={false}
+        style={
+          Array [
+            Object {
+              "color": undefined,
+              "fontSize": 40,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Material Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": undefined,
+            },
+            Object {
+              "fontFamily": "Roboto-LightItalic",
+              "fontSize": 18,
+            },
+          ]
+        }
+      >
+         12:30
+      </Text>
+    </View>
+  </View>
+</View>
+`;

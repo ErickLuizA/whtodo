@@ -1,41 +1,55 @@
-import React, { useState } from 'react'
+import * as React from 'react'
 import { Dimensions, StyleSheet, View, Text } from 'react-native'
-import { Badge, useTheme } from 'react-native-paper'
+import { useTheme } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import { ITask } from '../context/TaskContext'
 
 const width = Dimensions.get('screen').width
 
 interface ITaskCard {
   taskType: string
+  data: ITask
 }
 
-const TaskCard: React.FC<ITaskCard> = ({ taskType }) => {
+const TaskCard: React.FC<ITaskCard> = ({ taskType, data }) => {
   const { colors } = useTheme()
   return (
-    <View style={styles.container}>
-      {taskType !== 'Daily' && (
-        <Badge
-          size={30}
-          style={[styles.badge, { backgroundColor: colors.secondary }]}>
-          21/07
-        </Badge>
-      )}
-      <View style={[styles.card, { backgroundColor: colors.primary }]}>
-        <View>
+    <View style={styles.container} testID="cardContainer">
+      {data && (
+        <View style={[styles.card, { backgroundColor: colors.primary }]}>
           <Text style={[{ color: colors.text }, styles.title]}>
             {' '}
-            Task Name{' '}
+            {data?.Name}{' '}
           </Text>
           <Text style={[{ color: colors.secondary }, styles.category]}>
             {' '}
-            Category Name{' '}
+            {data?.Category}{' '}
           </Text>
+          <View style={styles.row}>
+            {taskType === 'Daily' ? (
+              <Text style={[{ color: colors.secondary }, styles.hour]}>
+                {' '}
+                {data.Date.toLocaleTimeString().slice(0, 5)}{' '}
+              </Text>
+            ) : (
+              <Text style={[{ color: colors.secondary }, styles.date]}>
+                {' '}
+                {data.Date.toLocaleDateString()}{' '}
+              </Text>
+            )}
+            <Icon
+              name={
+                data.Date.toLocaleTimeString() > '18'
+                  ? 'brightness-3'
+                  : 'brightness-7'
+              }
+              color={colors.secondary}
+              style={styles.icon}
+              size={40}
+            />
+          </View>
         </View>
-        <View>
-          <Icon name="brightness-3" color={colors.secondary} size={40} />
-          <Text style={[{ color: colors.secondary }, styles.hour]}> 12:30</Text>
-        </View>
-      </View>
+      )}
     </View>
   )
 }
@@ -49,23 +63,14 @@ const styles = StyleSheet.create({
   card: {
     width: width / 1.3,
     paddingVertical: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     padding: 10,
     borderRadius: 5,
-  },
-
-  badge: {
-    transform: [{ rotate: '270deg' }],
-    fontSize: 14,
-    alignSelf: 'center',
-    paddingHorizontal: 20,
   },
 
   title: {
     fontSize: 18,
     fontFamily: 'Roboto-Regular',
+    textAlign: 'center',
   },
 
   category: {
@@ -73,9 +78,24 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto-Light',
   },
 
+  icon: {
+    alignSelf: 'flex-end',
+  },
+
   hour: {
     fontSize: 18,
     fontFamily: 'Roboto-LightItalic',
+  },
+
+  date: {
+    fontSize: 18,
+    fontFamily: 'Roboto-LightItalic',
+  },
+
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 })
 

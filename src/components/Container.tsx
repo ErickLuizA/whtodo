@@ -1,16 +1,10 @@
-import React from 'react'
-import { SafeAreaView, StyleSheet, StatusBar } from 'react-native'
+import * as React from 'react'
+import { StyleSheet, StatusBar } from 'react-native'
 import { useTheme } from 'react-native-paper'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
-const Container: React.FC = ({ children }) => {
-  const { colors } = useTheme()
-
-  return (
-    <SafeAreaView
-      style={[{ backgroundColor: colors.background }, styles.container]}>
-      {children}
-    </SafeAreaView>
-  )
+interface IProps {
+  upper?: boolean
 }
 
 const styles = StyleSheet.create({
@@ -21,6 +15,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
+  smallContainer: {
+    paddingTop: StatusBar.currentHeight,
+    paddingHorizontal: 20,
+    flex: 1,
+    alignItems: 'center',
+  },
 })
+
+const Container: React.FC<IProps> = ({ children, upper }) => {
+  const { colors } = useTheme()
+
+  return (
+    <SafeAreaView
+      testID="container"
+      style={[
+        { backgroundColor: colors.background },
+        upper ? styles.smallContainer : styles.container,
+      ]}>
+      {children}
+    </SafeAreaView>
+  )
+}
 
 export default Container

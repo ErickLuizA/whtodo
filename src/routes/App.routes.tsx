@@ -1,62 +1,47 @@
-import React, { useContext } from 'react'
-import { createDrawerNavigator } from '@react-navigation/drawer'
+import React from 'react'
+import { createStackNavigator } from '@react-navigation/stack'
 
-import Dashboard from '../screens/Dashboard'
-import { AuthContext } from '../context/AuthContext'
-import { Avatar, useTheme } from 'react-native-paper'
-import Settings from '../screens/Settings'
-import { Text } from 'react-native'
+import Drawer from './Drawer'
+import Task from '../screens/Application/Task'
 
-const { Screen, Navigator } = createDrawerNavigator()
+export type AppRoutesParamList = {
+  Drawer: { result: string }
+  Task: { action: string }
+  AddTask: { result: string }
+}
 
-function Drawer() {
-  const { user } = useContext(AuthContext)
-  const { colors } = useTheme()
+const { Screen, Navigator } = createStackNavigator<AppRoutesParamList>()
 
+function AppRoutes() {
   return (
     <Navigator
-      initialRouteName="Dashboard"
-      drawerContentOptions={{
-        activeBackgroundColor: '#bbe',
-      }}
-      drawerStyle={{
-        backgroundColor: colors.primary,
+      initialRouteName="Drawer"
+      screenOptions={{
+        transitionSpec: {
+          open: {
+            animation: 'timing',
+            config: {
+              duration: 400,
+            },
+          },
+          close: {
+            animation: 'timing',
+            config: {
+              duration: 400,
+            },
+          },
+        },
       }}>
       <Screen
-        name="Dashboard"
-        component={Dashboard}
+        name="Drawer"
+        component={Drawer}
         options={{
-          drawerLabel: () => (
-            <Text testID="dashboard" style={{ color: colors.secondary }}>
-              {' '}
-              Dashboard{' '}
-            </Text>
-          ),
-          drawerIcon: () =>
-            user?.photoURL ? (
-              <Avatar.Image source={{ uri: user?.photoURL }} />
-            ) : (
-              <Avatar.Icon icon="account" />
-            ),
+          headerShown: false,
         }}
       />
-      <Screen
-        name="Settings"
-        component={Settings}
-        options={{
-          drawerLabel: () => (
-            <Text testID="settings" style={{ color: colors.secondary }}>
-              {' '}
-              Settings{' '}
-            </Text>
-          ),
-          drawerIcon: () => (
-            <Avatar.Icon icon="saw-blade" color={colors.secondary} />
-          ),
-        }}
-      />
+      <Screen name="Task" component={Task} />
     </Navigator>
   )
 }
 
-export default Drawer
+export default AppRoutes

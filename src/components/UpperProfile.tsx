@@ -3,8 +3,14 @@ import { AuthContext } from '../context/AuthContext'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Avatar, useTheme } from 'react-native-paper'
 import React, { useContext } from 'react'
-import { View, Text, StyleSheet, Dimensions, StatusBar } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  StatusBar,
+  TouchableOpacity,
+} from 'react-native'
 
 const width = Dimensions.get('screen').width
 
@@ -16,11 +22,14 @@ const UpperProfile: React.FC<IProps> = ({ openDrawer }) => {
   const { user } = useContext(AuthContext)
   const { colors } = useTheme()
 
-  function openAvatarImage() {}
+  function openAvatarImage() {
+    console.log('hi')
+  }
 
   return (
     <SafeAreaView
-      style={[{ backgroundColor: colors.primary }, styles.container]}>
+      testID="profileContainer"
+      style={[{ backgroundColor: colors.profileBackground }, styles.container]}>
       <TouchableOpacity testID="menu" style={styles.menu} onPress={openDrawer}>
         <Icon name="subject" size={60} color={colors.secondary} />
       </TouchableOpacity>
@@ -36,7 +45,7 @@ const UpperProfile: React.FC<IProps> = ({ openDrawer }) => {
             <Avatar.Icon icon="account" size={80} style={styles.avatar} />
           )}
         </TouchableOpacity>
-        <Text style={styles.text} testID="hello">
+        <Text style={[styles.text, { color: colors.text }]} testID="hello">
           Hello,{' '}
           <Text style={[styles.text, { color: colors.secondary }]}>
             {user?.displayName}
@@ -60,7 +69,7 @@ const styles = StyleSheet.create({
 
   avatarContainer: {
     alignSelf: 'center',
-    paddingTop: 40,
+    paddingTop: 20,
   },
 
   avatar: {

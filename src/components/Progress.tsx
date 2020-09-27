@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import * as React from 'react'
 import { Dimensions, StyleSheet, View } from 'react-native'
 import { AnimatedCircularProgress } from 'react-native-circular-progress'
 import { useTheme } from 'react-native-paper'
 import { Text } from 'react-native'
+import { TaskContext } from '../context/TaskContext'
 
 interface IProgressProps {
   progressType: string
@@ -12,36 +13,56 @@ const width = Dimensions.get('screen').width
 
 const Progress: React.FC<IProgressProps> = ({ progressType }) => {
   const { colors } = useTheme()
+  const { tasks } = React.useContext(TaskContext)
 
-  const [progressBar, setProgressBar] = useState(10)
+  const totalTasks = tasks.length
 
-  const [doneTasks, setDoneTasks] = useState(2)
-  const [totalTasks, setTotalTasks] = useState(20)
+  const doneTasks = tasks.filter((task) => task.Done === true)
+
+  function getProgress(): number {
+    let number = 0
+
+    tasks.forEach((task) => {
+      number += task.Progress
+    })
+
+    const progress = number / totalTasks
+
+    return progress
+  }
 
   return (
-    <View style={styles.container}>
+    <View
+      style={
+        progressType === 'Daily'
+          ? styles.container
+          : styles.notDashboardContainer
+      }
+      testID="progressContainer">
       <AnimatedCircularProgress
         size={120}
         width={15}
-        fill={progressBar}
+        fill={getProgress()}
         rotation={360}
         tintColor={colors.secondary}
         backgroundColor={colors.primary}>
-        {(fill) => (
-          <Text style={[styles.progressText, { color: colors.secondary }]}>
-            {' '}
-            {fill}%{' '}
-          </Text>
-        )}
+        {(fill) => {
+          return (
+            <Text style={[styles.progressText, { color: colors.secondary }]}>
+              {' '}
+              {fill}%{' '}
+            </Text>
+          )
+        }}
       </AnimatedCircularProgress>
       <View>
-        <Text style={[styles.text, { color: colors.text }]}>
+        <Text style={[styles.text, { color: colors.grayText }]}>
           {' '}
           {progressType} progress{' '}
         </Text>
         <Text style={[styles.taskText, { color: colors.grayText }]}>
           {' '}
-          {doneTasks}/{totalTasks} tasks done{' '}
+          {doneTasks.length}/{totalTasks} tasks done{' '}
         </Text>
       </View>
     </View>
@@ -54,6 +75,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     width: width / 1.2,
     alignItems: 'center',
+  },
+
+  notDashboardContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: width / 1.2,
+    alignItems: 'center',
+    marginTop: 60,
   },
 
   progressText: {

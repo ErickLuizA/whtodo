@@ -1,4 +1,5 @@
 import { expect, element, by } from 'detox'
+import { Logout } from '../functions'
 
 describe('Dashboard flow', () => {
   it('should open drawer', async () => {
@@ -11,5 +12,9 @@ describe('Dashboard flow', () => {
 
     await expect(dashboard).toBeVisible()
     await expect(settings).toBeVisible()
+  })
+
+  it('should logout', async () => {
+    await Logout()
   })
 })

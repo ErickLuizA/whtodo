@@ -6,9 +6,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useTheme } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import Container from '../components/Container'
-import { AuthContext } from '../context/AuthContext'
-import { ThemeContext } from '../context/ThemeContext'
+import Container from '../../../components/Container'
+import { AuthContext } from '../../../context/AuthContext'
+import { ThemeContext } from '../../../context/ThemeContext'
 
 const width = Dimensions.get('screen').width
 
