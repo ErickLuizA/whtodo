@@ -4,9 +4,15 @@ interface UpdateProps {
   Content: string
   taskName: string
   user: string
+  load: () => void
 }
 
-const UpdateTaskContent = async ({ Content, taskName, user }: UpdateProps) => {
+const UpdateTaskContent = async ({
+  Content,
+  taskName,
+  user,
+  load,
+}: UpdateProps) => {
   const colTask = firestore().collection('Users').doc(user).collection('Tasks')
 
   const tasks = await colTask.where('Name', '==', taskName).get()
@@ -16,6 +22,8 @@ const UpdateTaskContent = async ({ Content, taskName, user }: UpdateProps) => {
       Content,
     })
   })
+
+  load()
 }
 
 export default UpdateTaskContent

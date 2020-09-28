@@ -8,7 +8,7 @@ import Settings from '../screens/Application/Settings'
 import { Text } from 'react-native'
 import AddTask from '../screens/Application/AddTask'
 import Starred from '../screens/Application/Starred'
-import InProgress from '../screens/Application/InProgress'
+import Done from '../screens/Application/Done'
 import AllTask from '../screens/Application/AllTask'
 
 const { Screen, Navigator } = createDrawerNavigator()
@@ -76,17 +76,17 @@ function Drawer() {
         }}
       />
       <Screen
-        name="InProgress"
-        component={InProgress}
+        name="Done"
+        component={Done}
         options={{
           drawerLabel: () => (
-            <Text testID="inProgress" style={{ color: colors.secondary }}>
+            <Text testID="done" style={{ color: colors.secondary }}>
               {' '}
-              In Progress{' '}
+              Done{' '}
             </Text>
           ),
           drawerIcon: () => (
-            <Avatar.Icon icon="progress-clock" color={colors.secondary} />
+            <Avatar.Icon icon="file-check" color={colors.secondary} />
           ),
         }}
       />

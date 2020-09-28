@@ -9,7 +9,7 @@ export interface ITask {
   Content: string
   Done: boolean
   Starred: boolean
-  Progress: number
+  Progress: boolean
   Notification: boolean
 }
 

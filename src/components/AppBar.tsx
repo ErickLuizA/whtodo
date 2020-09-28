@@ -7,6 +7,7 @@ import React, { useContext } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Appbar, useTheme } from 'react-native-paper'
 import { AuthContext } from '../context/AuthContext'
+import { TaskContext } from '../context/TaskContext'
 import deleteTask from '../screens/Application/utils/deleteTask'
 import updateTask from '../screens/Application/utils/updateTask'
 
@@ -29,6 +30,12 @@ interface AppBarProps {
 export default function AppBar({ task, toggle, location }: AppBarProps) {
   const { colors } = useTheme()
   const { user } = useContext(AuthContext)
+  const { load, tasks } = useContext(TaskContext)
+
+  const isStarred = () =>
+    tasks.find((t) => t.Name === task && t.Starred === true)
+  const isNotificationOn = () =>
+    tasks.find((t) => t.Name === task && t.Notification === true)
 
   const navigation = useNavigation<NavigationProp<ParamListBase>>()
 
@@ -45,25 +52,27 @@ export default function AppBar({ task, toggle, location }: AppBarProps) {
           }
         />
         <Appbar.Action
-          icon="bell"
+          icon={isNotificationOn() ? 'bell-ring' : 'bell'}
           color={colors.primary}
           onPress={() =>
             updateTask({
               user: user?.uid,
-              star: false,
-              notifications: true,
+              load,
+              star: undefined,
+              notifications: isNotificationOn() ? false : true,
               task,
             })
           }
         />
         <Appbar.Action
-          icon="star-outline"
+          icon={isStarred() ? 'star' : 'star-outline'}
           color={colors.primary}
           onPress={() =>
             updateTask({
               user: user?.uid,
-              star: true,
-              notifications: false,
+              load,
+              star: isStarred() ? false : true,
+              notifications: undefined,
               task,
             })
           }
@@ -74,6 +83,7 @@ export default function AppBar({ task, toggle, location }: AppBarProps) {
           onPress={() =>
             deleteTask({
               user: user?.uid,
+              load,
               task,
             })
           }

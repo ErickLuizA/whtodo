@@ -20,15 +20,9 @@ const Progress: React.FC<IProgressProps> = ({ progressType, tasks }) => {
   const doneTasks = tasks.filter((task) => task.Done === true)
 
   function getProgress(): number {
-    let number = 0
+    const progress = (doneTasks.length * 100) / totalTasks
 
-    tasks.forEach((task) => {
-      number += task.Progress
-    })
-
-    const progress = number / totalTasks
-
-    if (number === 0 && totalTasks === 0) {
+    if (doneTasks.length === 0 && totalTasks === 0) {
       return 0
     }
 

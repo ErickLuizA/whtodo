@@ -148,7 +148,7 @@ export default function AddTask({ route }: Props) {
             Content: description,
             Done: false,
             Starred: false,
-            Progress: 0,
+            Progress: false,
             Notification: notificationOn,
           })
 

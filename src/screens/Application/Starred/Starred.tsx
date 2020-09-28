@@ -6,11 +6,13 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { useTheme } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import AppBar from '../../../components/AppBar'
 import Container from '../../../components/Container'
 import NotFound from '../../../components/NotFound'
 import Progress from '../../../components/Progress'
 import TaskCard from '../../../components/TaskCard'
 import { ITask, TaskContext } from '../../../context/TaskContext'
+import useOpenBar from '../../../hooks/useOpenBar'
 
 const width = Dimensions.get('screen').width
 
@@ -20,6 +22,8 @@ export default function Starred() {
   const navigation = useNavigation<DrawerNavigationProp<ParamListBase>>()
 
   const [starredTasks, setStarredTasks] = useState<ITask[]>([])
+
+  const { open, closeBar, openAppBar } = useOpenBar()
 
   useEffect(() => {
     const starred = tasks.filter((t) => t.Starred === true)
@@ -32,30 +36,43 @@ export default function Starred() {
   }
 
   function handleStar() {
-    console.log('star')
+    navigation.navigate('AllTask')
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <TouchableOpacity testID="menu" style={styles.menu} onPress={openDrawer}>
-        <Icon name="subject" size={60} color={colors.secondary} />
-      </TouchableOpacity>
-      <Container>
-        <Progress progressType="Starred" tasks={starredTasks} />
-        <Text style={[styles.title, { color: colors.secondary }]}>
-          Starred tasks
-        </Text>
-        <ScrollView>
-          {starredTasks.length === 0 ? (
-            <NotFound label="Star one task" onPress={handleStar} />
-          ) : (
-            starredTasks.map((star) => (
-              <TaskCard taskType="starred" data={star} />
-            ))
-          )}
-        </ScrollView>
-      </Container>
-    </SafeAreaView>
+    <>
+      {Boolean(open) && (
+        <AppBar location="Dashboard" task={open} toggle={closeBar} />
+      )}
+      <SafeAreaView style={styles.container}>
+        <TouchableOpacity
+          testID="menu"
+          style={styles.menu}
+          onPress={openDrawer}>
+          <Icon name="subject" size={60} color={colors.secondary} />
+        </TouchableOpacity>
+        <Container>
+          <Progress progressType="Starred" tasks={starredTasks} />
+          <Text style={[styles.title, { color: colors.secondary }]}>
+            Starred tasks
+          </Text>
+          <ScrollView>
+            {starredTasks.length === 0 ? (
+              <NotFound label="Star one task" onPress={handleStar} />
+            ) : (
+              starredTasks.map((star) => (
+                <TaskCard
+                  key={star.Name}
+                  openAppBar={openAppBar}
+                  taskType="starred"
+                  data={star}
+                />
+              ))
+            )}
+          </ScrollView>
+        </Container>
+      </SafeAreaView>
+    </>
   )
 }
 

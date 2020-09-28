@@ -6,6 +6,7 @@ import { RouteProp, useNavigation } from '@react-navigation/native'
 import firestore from '@react-native-firebase/firestore'
 import { AuthContext } from '../../../context/AuthContext'
 import updateTask from './updateTaskContent'
+import { TaskContext } from '../../../context/TaskContext'
 
 type TaskScreenRouteProps = RouteProp<AppRoutesParamList, 'Task'>
 
@@ -18,6 +19,7 @@ type Props = {
 export default function Task({ route }: Props) {
   const [value, setValue] = useState('')
   const { user } = useContext(AuthContext)
+  const { load } = useContext(TaskContext)
 
   const navigation = useNavigation()
 
@@ -27,7 +29,7 @@ export default function Task({ route }: Props) {
     .collection('Tasks')
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       const tasks = await colTask.where('Name', '==', route.params.task).get()
 
       tasks.forEach((task) => {
@@ -46,6 +48,7 @@ export default function Task({ route }: Props) {
           Content: value,
           user: user?.uid,
           taskName: route.params.task,
+          load,
         })
       }
 
