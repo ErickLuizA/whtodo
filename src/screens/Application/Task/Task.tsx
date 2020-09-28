@@ -1,8 +1,11 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useContext, useEffect, useLayoutEffect, useState } from 'react'
 import { AppRoutesParamList } from '../../../routes/App.routes'
 import { TextInput, Dimensions, View, StyleSheet } from 'react-native'
 import Header from '../../../components/Header'
 import { RouteProp, useNavigation } from '@react-navigation/native'
+import firestore from '@react-native-firebase/firestore'
+import { AuthContext } from '../../../context/AuthContext'
+import updateTask from './updateTaskContent'
 
 type TaskScreenRouteProps = RouteProp<AppRoutesParamList, 'Task'>
 
@@ -14,14 +17,38 @@ type Props = {
 
 export default function Task({ route }: Props) {
   const [value, setValue] = useState('')
+  const { user } = useContext(AuthContext)
 
   const navigation = useNavigation()
+
+  const colTask = firestore()
+    .collection('Users')
+    .doc(user?.uid)
+    .collection('Tasks')
+
+  useEffect(() => {
+    (async () => {
+      const tasks = await colTask.where('Name', '==', route.params.task).get()
+
+      tasks.forEach((task) => {
+        setValue(task.data().Content)
+      })
+    })()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleCheck = () => {
     if (route.params.action === 'new') {
       navigation.navigate('AddTask', { result: value })
     } else {
+      if (user) {
+        updateTask({
+          Content: value,
+          user: user?.uid,
+          taskName: route.params.task,
+        })
+      }
+
       navigation.navigate(route.params.action, { result: value })
     }
   }

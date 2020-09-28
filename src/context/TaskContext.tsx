@@ -10,6 +10,7 @@ export interface ITask {
   Done: boolean
   Starred: boolean
   Progress: number
+  Notification: boolean
 }
 
 interface ITasks {
@@ -31,8 +32,6 @@ const TaskProvider: React.FC = ({ children }) => {
       const userDoc = colRef.doc(user?.uid)
 
       const taskDoc = await userDoc.collection('Tasks').get()
-
-      userDoc.onSnapshot({ error: (e) => console.log(e) })
 
       let taskArray: any = []
 

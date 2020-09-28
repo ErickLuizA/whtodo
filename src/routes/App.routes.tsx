@@ -6,7 +6,7 @@ import Task from '../screens/Application/Task'
 
 export type AppRoutesParamList = {
   Drawer: { result: string }
-  Task: { action: string }
+  Task: { action: string; task: string }
   AddTask: { result: string }
 }
 

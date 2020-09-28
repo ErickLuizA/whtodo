@@ -149,6 +149,7 @@ export default function AddTask({ route }: Props) {
             Done: false,
             Starred: false,
             Progress: 0,
+            Notification: notificationOn,
           })
 
           load()

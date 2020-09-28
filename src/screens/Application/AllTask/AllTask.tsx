@@ -10,6 +10,8 @@ import Container from '../../../components/Container'
 import Progress from '../../../components/Progress'
 import TaskCard from '../../../components/TaskCard'
 import { ITask, TaskContext } from '../../../context/TaskContext'
+import useOpenBar from '../../../hooks/useOpenBar'
+import AppBar from '../../../components/AppBar'
 
 const width = Dimensions.get('screen').width
 
@@ -20,6 +22,8 @@ export default function AllTask() {
 
   const [allTasks, setAllTasks] = useState<ITask[]>([])
   const [categories, setCategories] = useState<string[]>([])
+
+  const { open, closeBar, openAppBar } = useOpenBar()
 
   useEffect(() => {
     setAllTasks(tasks)
@@ -39,6 +43,9 @@ export default function AllTask() {
 
   return (
     <SafeAreaView style={styles.container}>
+      {Boolean(open) && (
+        <AppBar location="AllTask" task={open} toggle={closeBar} />
+      )}
       <TouchableOpacity testID="menu" style={styles.menu} onPress={openDrawer}>
         <Icon name="subject" size={60} color={colors.secondary} />
       </TouchableOpacity>
@@ -65,7 +72,9 @@ export default function AllTask() {
               title={cat}>
               {allTasks.map((t) => {
                 if (t.Category === cat) {
-                  return <TaskCard taskType="All" data={t} />
+                  return (
+                    <TaskCard openAppBar={openAppBar} taskType="All" data={t} />
+                  )
                 }
               })}
             </List.Accordion>

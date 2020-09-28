@@ -3,9 +3,12 @@ import {
   ParamListBase,
   useNavigation,
 } from '@react-navigation/native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Appbar, useTheme } from 'react-native-paper'
+import { AuthContext } from '../context/AuthContext'
+import deleteTask from '../screens/Application/utils/deleteTask'
+import updateTask from '../screens/Application/utils/updateTask'
 
 const styles = StyleSheet.create({
   container: {
@@ -25,6 +28,7 @@ interface AppBarProps {
 
 export default function AppBar({ task, toggle, location }: AppBarProps) {
   const { colors } = useTheme()
+  const { user } = useContext(AuthContext)
 
   const navigation = useNavigation<NavigationProp<ParamListBase>>()
 
@@ -36,22 +40,43 @@ export default function AppBar({ task, toggle, location }: AppBarProps) {
         <Appbar.Action
           icon="pencil"
           color={colors.primary}
-          onPress={() => navigation.navigate('Task', { action: location })}
+          onPress={() =>
+            navigation.navigate('Task', { action: location, task })
+          }
         />
         <Appbar.Action
           icon="bell"
           color={colors.primary}
-          onPress={() => console.log('Pressed mail')}
+          onPress={() =>
+            updateTask({
+              user: user?.uid,
+              star: false,
+              notifications: true,
+              task,
+            })
+          }
         />
         <Appbar.Action
           icon="star-outline"
           color={colors.primary}
-          onPress={() => console.log('Pressed label')}
+          onPress={() =>
+            updateTask({
+              user: user?.uid,
+              star: true,
+              notifications: false,
+              task,
+            })
+          }
         />
         <Appbar.Action
           icon="delete"
           color={colors.primary}
-          onPress={() => console.log('Pressed delete')}
+          onPress={() =>
+            deleteTask({
+              user: user?.uid,
+              task,
+            })
+          }
         />
       </View>
     </Appbar.Header>
