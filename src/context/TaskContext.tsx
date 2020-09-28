@@ -14,6 +14,7 @@ export interface ITask {
 
 interface ITasks {
   tasks: ITask[]
+  load: () => void
 }
 
 const TaskContext = createContext({} as ITasks)
@@ -21,6 +22,7 @@ const TaskContext = createContext({} as ITasks)
 const TaskProvider: React.FC = ({ children }) => {
   const { user } = useContext(AuthContext)
   const [tasks, setTasks] = useState<ITask[]>([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const colRef = firestore().collection('Users')
@@ -30,6 +32,8 @@ const TaskProvider: React.FC = ({ children }) => {
 
       const taskDoc = await userDoc.collection('Tasks').get()
 
+      userDoc.onSnapshot({ error: (e) => console.log(e) })
+
       let taskArray: any = []
 
       taskDoc.forEach((snapshot) => {
@@ -38,12 +42,19 @@ const TaskProvider: React.FC = ({ children }) => {
         taskArray.push(data)
       })
 
+      setLoading(false)
       setTasks(taskArray)
     })()
-  }, [user])
+  }, [user, loading])
+
+  function load() {
+    setLoading(true)
+  }
 
   return (
-    <TaskContext.Provider value={{ tasks }}>{children}</TaskContext.Provider>
+    <TaskContext.Provider value={{ tasks, load }}>
+      {children}
+    </TaskContext.Provider>
   )
 }
 

@@ -3,17 +3,17 @@ import { Dimensions, StyleSheet, View } from 'react-native'
 import { AnimatedCircularProgress } from 'react-native-circular-progress'
 import { useTheme } from 'react-native-paper'
 import { Text } from 'react-native'
-import { TaskContext } from '../context/TaskContext'
+import { ITask } from '../context/TaskContext'
 
 interface IProgressProps {
   progressType: string
+  tasks: ITask[]
 }
 
 const width = Dimensions.get('screen').width
 
-const Progress: React.FC<IProgressProps> = ({ progressType }) => {
+const Progress: React.FC<IProgressProps> = ({ progressType, tasks }) => {
   const { colors } = useTheme()
-  const { tasks } = React.useContext(TaskContext)
 
   const totalTasks = tasks.length
 
@@ -27,6 +27,10 @@ const Progress: React.FC<IProgressProps> = ({ progressType }) => {
     })
 
     const progress = number / totalTasks
+
+    if (number === 0 && totalTasks === 0) {
+      return 0
+    }
 
     return progress
   }
@@ -82,7 +86,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     width: width / 1.2,
     alignItems: 'center',
-    marginTop: 60,
+    marginTop: 40,
   },
 
   progressText: {

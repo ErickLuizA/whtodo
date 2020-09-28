@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
   listItem: {
     backgroundColor: '#cce',
     width: width / 1.25,
+    marginVertical: 5,
   },
   row: {
     flexDirection: 'row',

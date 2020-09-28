@@ -4,7 +4,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useTheme } from 'react-native-paper'
 
 const width = Dimensions.get('screen').width
-const height = Dimensions.get('screen').height
 
 const styles = StyleSheet.create({
   button: {
@@ -24,6 +23,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontFamily: 'Roboto-Medium',
     textAlign: 'center',
+    fontSize: 18,
   },
 })
 

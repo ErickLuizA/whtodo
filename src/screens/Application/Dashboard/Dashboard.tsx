@@ -10,12 +10,13 @@ import TaskCard from '../../../components/TaskCard'
 import { TaskContext } from '../../../context/TaskContext'
 import Button from '../../../components/Button'
 import { ScrollView } from 'react-native-gesture-handler'
+import NotFound from '../../../components/NotFound'
 
 const width = Dimensions.get('screen').width
 
 export default function Dashboard() {
   const { tasks } = useContext(TaskContext)
-  const { colors, images } = useTheme()
+  const { colors } = useTheme()
   const navigation = useNavigation<DrawerNavigationProp<ParamListBase>>()
 
   function openDrawer() {
@@ -26,12 +27,16 @@ export default function Dashboard() {
     return tasks.find((task) => task.Date.getDate() === new Date().getDate())
   }
 
+  function getTodayTasks() {
+    return tasks.filter((t) => t.Date.getDate() === new Date().getDate())
+  }
+
   return (
     <>
       <UpperProfile openDrawer={openDrawer} />
       <Container>
         <View style={styles.flex}>
-          <Progress progressType="Daily" />
+          <Progress progressType="Daily" tasks={getTodayTasks()} />
           <Text style={[{ color: colors.secondary }, styles.text]}>
             {' '}
             Daily Tasks
@@ -46,21 +51,10 @@ export default function Dashboard() {
                 }
               })
             ) : (
-              <View style={styles.imgView}>
-                <Text style={[styles.notTaskText, { color: colors.text }]}>
-                  No tasks for today
-                </Text>
-                <images.notfound
-                  width={width / 1.5}
-                  height={width / 1.5}
-                  testID="img"
-                />
-                <Button
-                  text="Add one"
-                  big
-                  onPress={() => navigation.navigate('AddTask')}
-                />
-              </View>
+              <NotFound
+                label="Add a task"
+                onPress={() => navigation.navigate('AddTask')}
+              />
             )}
           </ScrollView>
         </View>
@@ -80,13 +74,4 @@ const styles = StyleSheet.create({
   },
 
   flex: { flex: 1 },
-
-  imgView: {
-    alignItems: 'center',
-  },
-
-  notTaskText: {
-    fontSize: 20,
-    fontFamily: 'Roboto-Light',
-  },
 })

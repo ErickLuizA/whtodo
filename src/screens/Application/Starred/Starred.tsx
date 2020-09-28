@@ -1,23 +1,38 @@
 import { DrawerNavigationProp } from '@react-navigation/drawer'
 import { ParamListBase, useNavigation } from '@react-navigation/native'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Dimensions, StatusBar, StyleSheet, Text } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { useTheme } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import Container from '../../../components/Container'
-import { AuthContext } from '../../../context/AuthContext'
+import NotFound from '../../../components/NotFound'
+import Progress from '../../../components/Progress'
+import TaskCard from '../../../components/TaskCard'
+import { ITask, TaskContext } from '../../../context/TaskContext'
 
 const width = Dimensions.get('screen').width
 
 export default function Starred() {
-  const { user } = useContext(AuthContext)
+  const { tasks } = useContext(TaskContext)
   const { colors } = useTheme()
   const navigation = useNavigation<DrawerNavigationProp<ParamListBase>>()
 
+  const [starredTasks, setStarredTasks] = useState<ITask[]>([])
+
+  useEffect(() => {
+    const starred = tasks.filter((t) => t.Starred === true)
+
+    setStarredTasks(starred)
+  }, [tasks])
+
   function openDrawer() {
     navigation.openDrawer()
+  }
+
+  function handleStar() {
+    console.log('star')
   }
 
   return (
@@ -25,8 +40,21 @@ export default function Starred() {
       <TouchableOpacity testID="menu" style={styles.menu} onPress={openDrawer}>
         <Icon name="subject" size={60} color={colors.secondary} />
       </TouchableOpacity>
-      <Text>Starred</Text>
-      <Container />
+      <Container>
+        <Progress progressType="Starred" tasks={starredTasks} />
+        <Text style={[styles.title, { color: colors.secondary }]}>
+          Starred tasks
+        </Text>
+        <ScrollView>
+          {starredTasks.length === 0 ? (
+            <NotFound label="Star one task" onPress={handleStar} />
+          ) : (
+            starredTasks.map((star) => (
+              <TaskCard taskType="starred" data={star} />
+            ))
+          )}
+        </ScrollView>
+      </Container>
     </SafeAreaView>
   )
 }
@@ -53,7 +81,14 @@ const styles = StyleSheet.create({
 
   container: {
     paddingTop: StatusBar.currentHeight,
-    paddingHorizontal: 20,
-    flex: 0.6,
+    flex: 1,
+  },
+
+  title: {
+    fontSize: 26,
+    alignSelf: 'flex-start',
+    fontFamily: 'Roboto-Medium',
+    marginVertical: 10,
+    marginLeft: 10,
   },
 })

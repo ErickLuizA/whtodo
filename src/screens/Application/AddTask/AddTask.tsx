@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
 
 export default function AddTask({ route }: Props) {
   const { user } = useContext(AuthContext)
-  const { tasks } = useContext(TaskContext)
+  const { tasks, load } = useContext(TaskContext)
   const { colors } = useTheme()
 
   const navigation = useNavigation<DrawerNavigationProp<ParamListBase>>()
@@ -115,7 +115,11 @@ export default function AddTask({ route }: Props) {
   useEffect(() => {
     let array: string[] = []
 
-    tasks.forEach((t) => array.push(t.Category))
+    tasks.forEach((t) => {
+      if (!array.includes(t.Category)) {
+        array.push(t.Category)
+      }
+    })
 
     setCategories(array)
   }, [tasks])
@@ -146,6 +150,8 @@ export default function AddTask({ route }: Props) {
             Starred: false,
             Progress: 0,
           })
+
+          load()
 
           navigation.navigate('Dashboard')
         } catch (e) {

@@ -22,10 +22,6 @@ const UpperProfile: React.FC<IProps> = ({ openDrawer }) => {
   const { user } = useContext(AuthContext)
   const { colors } = useTheme()
 
-  function openAvatarImage() {
-    console.log('hi')
-  }
-
   return (
     <SafeAreaView
       testID="profileContainer"
@@ -34,17 +30,15 @@ const UpperProfile: React.FC<IProps> = ({ openDrawer }) => {
         <Icon name="subject" size={60} color={colors.secondary} />
       </TouchableOpacity>
       <View style={styles.avatarContainer}>
-        <TouchableOpacity onPress={openAvatarImage}>
-          {user?.photoURL ? (
-            <Avatar.Image
-              source={{ uri: user?.photoURL }}
-              size={80}
-              style={styles.avatar}
-            />
-          ) : (
-            <Avatar.Icon icon="account" size={80} style={styles.avatar} />
-          )}
-        </TouchableOpacity>
+        {user?.photoURL ? (
+          <Avatar.Image
+            source={{ uri: user?.photoURL }}
+            size={80}
+            style={styles.avatar}
+          />
+        ) : (
+          <Avatar.Icon icon="account" size={80} style={styles.avatar} />
+        )}
         <Text style={[styles.text, { color: colors.text }]} testID="hello">
           Hello,{' '}
           <Text style={[styles.text, { color: colors.secondary }]}>

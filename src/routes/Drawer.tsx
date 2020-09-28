@@ -8,7 +8,6 @@ import Settings from '../screens/Application/Settings'
 import { Text } from 'react-native'
 import AddTask from '../screens/Application/AddTask'
 import Starred from '../screens/Application/Starred'
-import Today from '../screens/Application/Today'
 import InProgress from '../screens/Application/InProgress'
 import AllTask from '../screens/Application/AllTask'
 
@@ -60,21 +59,7 @@ function Drawer() {
           ),
         }}
       />
-      <Screen
-        name="Today"
-        component={Today}
-        options={{
-          drawerLabel: () => (
-            <Text testID="today" style={{ color: colors.secondary }}>
-              {' '}
-              Today{' '}
-            </Text>
-          ),
-          drawerIcon: () => (
-            <Avatar.Icon icon="calendar-check" color={colors.secondary} />
-          ),
-        }}
-      />
+
       <Screen
         name="AllTask"
         component={AllTask}
