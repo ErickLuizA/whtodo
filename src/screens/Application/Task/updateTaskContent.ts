@@ -1,0 +1,21 @@
+import firestore from '@react-native-firebase/firestore'
+
+interface UpdateProps {
+  Content: string
+  taskName: string
+  user: string
+}
+
+const UpdateTaskContent = async ({ Content, taskName, user }: UpdateProps) => {
+  const colTask = firestore().collection('Users').doc(user).collection('Tasks')
+
+  const tasks = await colTask.where('Name', '==', taskName).get()
+
+  tasks.forEach((t) => {
+    colTask.doc(t.data().id).update({
+      Content,
+    })
+  })
+}
+
+export default UpdateTaskContent
