@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Dimensions, StyleSheet, View, Text } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useTheme } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { ITask } from '../context/TaskContext'
@@ -9,12 +10,17 @@ const width = Dimensions.get('screen').width
 interface ITaskCard {
   taskType: string
   data: ITask
+  openAppBar: (arg: string) => void
 }
 
-const TaskCard: React.FC<ITaskCard> = ({ taskType, data }) => {
+const TaskCard: React.FC<ITaskCard> = ({ taskType, data, openAppBar }) => {
   const { colors } = useTheme()
+
   return (
-    <View style={styles.container} testID="cardContainer">
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => openAppBar(data.Name)}
+      testID="cardContainer">
       {data && (
         <View style={[styles.card, { backgroundColor: colors.primary }]}>
           <Text style={[{ color: colors.text }, styles.title]}>
@@ -50,7 +56,7 @@ const TaskCard: React.FC<ITaskCard> = ({ taskType, data }) => {
           </View>
         </View>
       )}
-    </View>
+    </TouchableOpacity>
   )
 }
 

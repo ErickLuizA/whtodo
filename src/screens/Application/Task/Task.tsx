@@ -1,23 +1,29 @@
 import React, { useLayoutEffect, useState } from 'react'
 import { AppRoutesParamList } from '../../../routes/App.routes'
 import { TextInput, Dimensions, View, StyleSheet } from 'react-native'
-import { StackNavigationProp } from '@react-navigation/stack'
 import Header from '../../../components/Header'
+import { RouteProp, useNavigation } from '@react-navigation/native'
 
-type TaskScreenNavigationProps = StackNavigationProp<AppRoutesParamList, 'Task'>
+type TaskScreenRouteProps = RouteProp<AppRoutesParamList, 'Task'>
 
 const height = Dimensions.get('screen').height
 
 type Props = {
-  navigation: TaskScreenNavigationProps
+  route: TaskScreenRouteProps
 }
 
-export default function Task({ navigation }: Props) {
+export default function Task({ route }: Props) {
   const [value, setValue] = useState('')
+
+  const navigation = useNavigation()
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleCheck = () => {
-    navigation.navigate('AddTask', { result: value })
+    if (route.params.action === 'new') {
+      navigation.navigate('AddTask', { result: value })
+    } else {
+      navigation.navigate(route.params.action, { result: value })
+    }
   }
 
   useLayoutEffect(() => {
