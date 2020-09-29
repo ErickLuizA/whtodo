@@ -16,9 +16,11 @@ const width = Dimensions.get('screen').width
 
 interface IProps {
   openDrawer: () => void
+  account?: boolean
+  openPhoto?: () => void
 }
 
-const UpperProfile: React.FC<IProps> = ({ openDrawer }) => {
+const UpperProfile: React.FC<IProps> = ({ openDrawer, account, openPhoto }) => {
   const { user } = useContext(AuthContext)
   const { colors } = useTheme()
 
@@ -26,11 +28,32 @@ const UpperProfile: React.FC<IProps> = ({ openDrawer }) => {
     <SafeAreaView
       testID="profileContainer"
       style={[{ backgroundColor: colors.profileBackground }, styles.container]}>
-      <TouchableOpacity testID="menu" style={styles.menu} onPress={openDrawer}>
-        <Icon name="subject" size={60} color={colors.secondary} />
-      </TouchableOpacity>
+      {!account ? (
+        <TouchableOpacity
+          testID="menu"
+          style={styles.menu}
+          onPress={openDrawer}>
+          <Icon name="subject" size={60} color={colors.secondary} />
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity onPress={openDrawer}>
+          <Icon name="keyboard-backspace" size={60} color={colors.secondary} />
+        </TouchableOpacity>
+      )}
       <View style={styles.avatarContainer}>
-        {user?.photoURL ? (
+        {account ? (
+          <TouchableOpacity onPress={openPhoto}>
+            {user?.photoURL ? (
+              <Avatar.Image
+                source={{ uri: user?.photoURL }}
+                size={80}
+                style={styles.avatar}
+              />
+            ) : (
+              <Avatar.Icon icon="account" size={80} style={styles.avatar} />
+            )}
+          </TouchableOpacity>
+        ) : user?.photoURL ? (
           <Avatar.Image
             source={{ uri: user?.photoURL }}
             size={80}
@@ -39,6 +62,7 @@ const UpperProfile: React.FC<IProps> = ({ openDrawer }) => {
         ) : (
           <Avatar.Icon icon="account" size={80} style={styles.avatar} />
         )}
+
         <Text style={[styles.text, { color: colors.text }]} testID="hello">
           Hello,{' '}
           <Text style={[styles.text, { color: colors.secondary }]}>

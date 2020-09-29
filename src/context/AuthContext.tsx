@@ -6,6 +6,7 @@ interface AuthContextProps {
   user: FirebaseAuthTypes.User | null
   signOut: () => void
   loading: boolean
+  load: () => void
 }
 
 const AuthContext = createContext<AuthContextProps>({} as AuthContextProps)
@@ -23,15 +24,19 @@ const AuthProvider: React.FC = ({ children }) => {
       }
       setLoading(false)
     })
-  }, [])
+  }, [loading])
 
   async function signOut() {
     await auth().signOut()
   }
 
+  function load() {
+    setLoading(true)
+  }
+
   return (
     <AuthContext.Provider
-      value={{ signed: Boolean(user), user, signOut, loading }}>
+      value={{ signed: Boolean(user), user, signOut, loading, load }}>
       {children}
     </AuthContext.Provider>
   )
