@@ -12,6 +12,7 @@ import TaskCard from '../../../components/TaskCard'
 import { ITask, TaskContext } from '../../../context/TaskContext'
 import useOpenBar from '../../../hooks/useOpenBar'
 import AppBar from '../../../components/AppBar'
+import NotFound from '../../../components/NotFound'
 
 const width = Dimensions.get('screen').width
 
@@ -22,6 +23,8 @@ export default function AllTask() {
 
   const [allTasks, setAllTasks] = useState<ITask[]>([])
   const [categories, setCategories] = useState<string[]>([])
+
+  console.log('allTasks', allTasks)
 
   const { open, closeBar, openAppBar } = useOpenBar()
 
@@ -59,35 +62,43 @@ export default function AllTask() {
             All tasks
           </Text>
           <ScrollView>
-            {categories.map((cat) => (
-              <List.Accordion
-                left={() => (
-                  <Text style={[{ color: colors.secondary }, styles.listText]}>
-                    {' '}
-                    {cat}{' '}
-                  </Text>
-                )}
-                titleStyle={styles.titleStyle}
-                key={cat}
-                style={[
-                  styles.listAccordion,
-                  { backgroundColor: colors.primary },
-                ]}
-                title={cat}>
-                {allTasks.map((t) => {
-                  if (t.Category === cat) {
-                    return (
-                      <TaskCard
-                        key={t.Name}
-                        openAppBar={openAppBar}
-                        taskType="All"
-                        data={t}
-                      />
-                    )
-                  }
-                })}
-              </List.Accordion>
-            ))}
+            {allTasks.length > 0 ? (
+              categories.map((cat) => (
+                <List.Accordion
+                  left={() => (
+                    <Text
+                      style={[{ color: colors.secondary }, styles.listText]}>
+                      {' '}
+                      {cat}{' '}
+                    </Text>
+                  )}
+                  titleStyle={styles.titleStyle}
+                  key={cat}
+                  style={[
+                    styles.listAccordion,
+                    { backgroundColor: colors.primary },
+                  ]}
+                  title={cat}>
+                  {allTasks.map((t) => {
+                    if (t.Category === cat) {
+                      return (
+                        <TaskCard
+                          key={t.Name}
+                          openAppBar={openAppBar}
+                          taskType="All"
+                          data={t}
+                        />
+                      )
+                    }
+                  })}
+                </List.Accordion>
+              ))
+            ) : (
+              <NotFound
+                label="Add one"
+                onPress={() => navigation.navigate('AddTask')}
+              />
+            )}
           </ScrollView>
         </Container>
       </SafeAreaView>
