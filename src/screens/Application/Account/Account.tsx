@@ -17,7 +17,7 @@ const { height, width } = Dimensions.get('screen')
 const styles = StyleSheet.create({
   group: {
     alignSelf: 'flex-start',
-    top: -height / 5,
+    top: -height / 8,
     marginVertical: 20,
   },
 

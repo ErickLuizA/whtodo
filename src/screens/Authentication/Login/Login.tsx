@@ -3,10 +3,9 @@ import { Text, StyleSheet, Dimensions, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Container from '../../../components/Container'
 import { useNavigation } from '@react-navigation/native'
-import { Divider, TextInput, Title, useTheme } from 'react-native-paper'
+import { Divider, Title, useTheme } from 'react-native-paper'
 import auth from '@react-native-firebase/auth'
 import useSubmit from './useSubmit'
-import useValidator from './useValidator'
 import handleGoogleLogin from '../common/handleGoogleLogin'
 import GoogleButton from '../common/GoogleButton'
 import Button from '../../../components/Button'
@@ -30,8 +29,6 @@ export default function Login() {
   }
 
   function useForm() {
-    console.log('run')
-
     useSubmit({ email, password, setError, auth })
   }
 

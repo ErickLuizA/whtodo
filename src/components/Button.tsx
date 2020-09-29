@@ -39,7 +39,7 @@ const Button = ({ text, onPress, big }: IButton) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      testID={'button' + text}
+      testID={big ? `${text}BigButton` : text + 'Button'}
       style={[
         big ? styles.bigButton : styles.button,
         { backgroundColor: colors.primary },

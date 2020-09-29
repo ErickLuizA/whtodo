@@ -6,7 +6,7 @@ describe('Forgot password flow', () => {
   })
 
   it('should be able to go to login screen', async () => {
-    const loginButton = element(by.id('loginButton'))
+    const loginButton = element(by.id('LOGINButton'))
     await expect(loginButton).toBeVisible()
     await loginButton.tap()
 
@@ -23,8 +23,8 @@ describe('Forgot password flow', () => {
   })
 
   it('should be able to send a password reset request', async () => {
-    const forgotInput = element(by.id('forgotInput'))
-    const resetButton = element(by.id('resetButton'))
+    const forgotInput = element(by.id('emailInput'))
+    const resetButton = element(by.id('RESET PASSWORDBigButton'))
 
     await expect(forgotInput).toBeVisible()
     await expect(resetButton).toBeVisible()

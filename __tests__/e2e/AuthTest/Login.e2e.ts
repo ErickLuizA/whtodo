@@ -7,7 +7,7 @@ describe('Login flow', () => {
   })
 
   it('should be able to go to login screen', async () => {
-    const loginButton = element(by.id('loginButton'))
+    const loginButton = element(by.id('LOGINButton'))
     await expect(loginButton).toBeVisible()
     await loginButton.tap()
 
@@ -18,13 +18,12 @@ describe('Login flow', () => {
   it('should not be able to login with email and password', async () => {
     const emailInput = element(by.id('emailInput'))
     const passwordInput = element(by.id('passwordInput'))
-    const submitLoginButton = element(by.id('submitLoginButton'))
+    const submitLoginButton = element(by.id('LOGINBigButton'))
 
     const emailError = element(by.id('emailError'))
 
     await expect(emailInput).toBeVisible()
     await expect(passwordInput).toBeVisible()
-    await expect(submitLoginButton).toBeVisible()
 
     await emailInput.typeText('')
     await emailInput.tapReturnKey()

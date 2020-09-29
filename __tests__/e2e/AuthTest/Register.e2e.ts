@@ -7,7 +7,7 @@ describe('Register flow', () => {
   })
 
   it('should be able to go to register screen', async () => {
-    const registerButton = element(by.id('registerButton'))
+    const registerButton = element(by.id('REGISTERButton'))
     await expect(registerButton).toBeVisible()
     await registerButton.tap()
 
@@ -19,7 +19,7 @@ describe('Register flow', () => {
     const nameInput = element(by.id('nameInput'))
     const emailInput = element(by.id('emailInput'))
     const passwordInput = element(by.id('passwordInput'))
-    const submitRegisterButton = element(by.id('submitRegisterButton'))
+    const submitRegisterButton = element(by.id('REGISTERBigButton'))
 
     const nameError = element(by.id('nameError'))
     const emailError = element(by.id('emailError'))
@@ -27,7 +27,6 @@ describe('Register flow', () => {
     await expect(nameInput).toBeVisible()
     await expect(emailInput).toBeVisible()
     await expect(passwordInput).toBeVisible()
-    await expect(submitRegisterButton).toBeVisible()
 
     await nameInput.typeText('')
     await nameInput.tapReturnKey()

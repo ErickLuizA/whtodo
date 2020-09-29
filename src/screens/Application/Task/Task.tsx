@@ -29,13 +29,15 @@ export default function Task({ route }: Props) {
     .collection('Tasks')
 
   useEffect(() => {
-    ;(async () => {
-      const tasks = await colTask.where('Name', '==', route.params.task).get()
+    if (route.params.task) {
+      (async () => {
+        const tasks = await colTask.where('Name', '==', route.params.task).get()
 
-      tasks.forEach((task) => {
-        setValue(task.data().Content)
-      })
-    })()
+        tasks.forEach((task) => {
+          setValue(task.data().Content)
+        })
+      })()
+    }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

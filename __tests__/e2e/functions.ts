@@ -3,7 +3,7 @@ import { expect, element, by } from 'detox'
 export const Login = async () => {
   const emailInput = element(by.id('emailInput'))
   const passwordInput = element(by.id('passwordInput'))
-  const submitLoginButton = element(by.id('submitLoginButton'))
+  const submitLoginButton = element(by.text('LOGIN'))
 
   await expect(emailInput).toBeVisible()
   await expect(passwordInput).toBeVisible()

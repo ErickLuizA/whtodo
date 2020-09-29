@@ -15,7 +15,7 @@ export default function Header({ handleCheck }: IProps) {
       <TouchableOpacity onPress={handleCheck}>
         <Icon name="check" size={40} color={colors.secondary} />
       </TouchableOpacity>
-      <TouchableOpacity>
+      {/* <TouchableOpacity>
         <Icon name="reply" size={40} color={colors.secondary} />
       </TouchableOpacity>
       <TouchableOpacity>
@@ -32,7 +32,7 @@ export default function Header({ handleCheck }: IProps) {
       </TouchableOpacity>
       <TouchableOpacity>
         <Icon name="dots-vertical" size={40} color={colors.secondary} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   )
 }
