@@ -28,7 +28,6 @@
   <a href="#building_construction-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#rocket-getting-started">Getting Started</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#memo-license">License</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="./.github"> Screenshots</a>
 </p>
 
 > Under construction
@@ -81,6 +80,11 @@ $ yarn android or yarn ios
 
 $ yarn start
 ```
+
+## :information_source: TODO
+  - Add notifications
+  - Add customizable task editor
+  - Implement tests
 
 ## :memo: License
 
