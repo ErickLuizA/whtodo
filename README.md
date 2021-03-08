@@ -30,7 +30,6 @@
   <a href="#memo-license">License</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 </p>
 
-> Under construction
 
 ## :clipboard: Description
 
@@ -51,6 +50,10 @@ whtodo is a task noting app built with React Native and Firebase
 
 ```shell
  $ git clone https://github.com/ErickLuizA/whtodo.git
+ 
+ or
+
+ $ gh repo clone ErickLuizA/whtodo
 ```
 
 ## 2. Installation
@@ -85,6 +88,7 @@ $ yarn start
   - Add notifications
   - Add customizable task editor
   - Implement tests
+  - Implement offline mode
 
 ## :memo: License
 
@@ -92,5 +96,4 @@ This project is under the MIT license. See the file [LICENSE](LICENSE) for more 
 
 ---
 
-Build with 💙 By [Erick](https://erickluiz.netlify.app/)
-
+Build with 💙 By [Erick](https://www.linkedin.com/in/erick-luiz-47151a1a4/)
